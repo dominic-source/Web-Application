@@ -1,0 +1,91 @@
+.navigation-pan{
+text-align:left;
+margin-left:auto;
+margin-right:auto;
+padding:0;
+padding-top:20px;
+border:0;
+width:33rem;
+line-height: 2.5;
+}
+.sweet{
+  margin-bottom:0;
+}
+.designer{
+  font-size:30px;
+}
+.workdesign{
+  text-align:left;
+  font-size:50px;
+}
+
+.work{
+  width:35rem;
+  color:#2b2e4a;
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+
+}
+.worksection{
+  background-color:#f4f4f4;
+  margin:0;
+}
+
+.position{
+  border:#515070 medium solid;
+  background-color:#f4f4f4;
+  width:50rem;
+  border-left-width:20px;
+  border-radius: 5px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  box-shadow:3px 3px 7px 2px #515070;
+  /* margin-left:auto;
+  margin-right:auto; */
+  line-height:1.5;
+  /* margin-top:10px;
+  margin-bottom:10px; */
+  margin:50px auto 50px auto ;
+}
+
+.rev{
+  border-left-width:0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-right-width:20px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+
+}
+
+@media (max-width:640px)
+{
+  .navigation-pan{
+    font-size:20px;
+    width:80%;
+  }
+
+  .work{
+    width:20rem;
+  }
+  .position{
+    width:80%;
+    margin:15px;
+    font-size:0.5rem;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .position h1{
+    font-size:1rem;
+  }
+}
+
+.dome{
+  font-weight:bold;
+  font-size:2rem;
+}
+
+.textcolor{
+  color:#2b2e4a;
+}
