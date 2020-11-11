@@ -1,0 +1,83 @@
+<%- include("partials/header") -%>
+
+<style media="screen">
+  .media-body {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  @media (max-width:499px) {
+    .OR {
+      font-size: 8px;
+      width: 17em;
+      margin-left: 2px;
+      line-height: 2;
+    }
+  }
+
+  @media (max-width:400px) {
+    .dotime {
+      font-size: 0.7rem;
+    }
+
+    .fonter {
+      font-size: 8px;
+    }
+
+    .OR {
+      font-size: 8px;
+      width: 15em;
+      margin-left: 1px;
+      line-height: 1.8;
+    }
+  }
+</style>
+<div class="jumbotron mb-3">
+  <div class="container">
+    <h1 class="display-3 online">Online courses are available on this platform.</h1>
+    <div class="">
+      <p class="ptop">Spice up your career to make you fit for the global market.
+        <span style="color:#81b214;">Are you worried about your career in your area of specialization? </span>
+        This platform just got you covered. Take an online course now to improve your skill.
+        Experience from various expert might be of great help to you.
+        Click the links below to participate in any online course of your choice.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<div class="textcolor ml-5 ">
+  <h1 class="online">Available online courses</h1>
+</div>
+
+<ul class="list-unstyled mx-2">
+  <li class="media">
+    <a href="/"><img src="images/development.jpg" class="mr-3 newsimage mt-2" alt="">
+    </a>
+    <div class="media-body">
+      <a class="mb-1 fonter" href="...">Web development with python</a>
+      <h5 class="OR">This is a web development course click the link to participate in this life changing moment
+        <h6 class="dotime">Cost:$10</h6>
+        <small class="dotime">Time posted:time</small>
+      </h5>
+    </div>
+  </li>
+<hr style="background-color:#e9ecef;">
+  <li class="media">
+    <a href="/"><img src="images/bookPhone.jpg" class="mr-3 newsimage mt-2" alt="">
+    <div class="media-body">
+      <a class="mb-1 fonter" href="...">Web development with python</a>
+      <h5 class="OR">This is a web development course click the link to participate in this life changing moment
+        <h6 class="dotime">Cost:$10</h6>
+        <small class="dotime">Time posted:time</small>
+      </h5>
+    </div>
+  </li>
+
+
+</ul>
+
+
+
+
+<%- include("partials/footer") -%>

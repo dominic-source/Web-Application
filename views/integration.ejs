@@ -1,0 +1,25 @@
+<%- include("partials/dashboardheader") -%>
+
+<div class="aside">
+  <form class="form-inline" action="index.html" method="post">
+    <ul class="list-unstyled">
+      <li>
+          <h2 class="my-3 dash">Manually add Api <span class="text-info plus">+</span>
+          <div class="hide">
+          <label for="apiName" class="form-control my-3 mr-3 btn-info">Api name</label>
+          <input class="form-control my-3" type="text" name="" value="" id="apiName" placeholder="Api Name"><br>
+          <label for="apiAddress" class="btn-info my-3 form-control mr-3">Api link address</label>
+          <input class="form-control my-3" type="text" id="apiAddress" name="" value="" placeholder="Api Address"><br>
+        </div>
+      </li>
+
+      <li class='submit'>
+        <input type="submit" class="btn-success form-control my-3 " name="" value="Save api">
+      </li>
+
+    </ul>
+  </form>
+
+</div>
+
+<%- include("partials/dashboardfooter") -%>

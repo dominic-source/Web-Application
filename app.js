@@ -53,25 +53,55 @@ passport.deserializeUser(function(id,done){
   });
 });
 
-
+// Main part of dome technologies
 
 app.get("/",function(req,res){
   res.render("home");
 });
 
-app.get("/products", function(req,res){
-  res.render("products");
+app.get("/myBlog", function(req,res){
+  res.render("myBlog");
 });
 
+app.get("/products", function(req,res){
+  res.render("payment");
+});
 
+app.get("/customer",function(req,res){
+  res.render("customer");
+});
 
+app.get("/signup",function(req,res){
+  res.render("signup");
+});
 
+app.get("/signin", function(req,res){
+  res.render("signin");
+});
 
+app.get("/admin",function(req,res){
+  res.render("admin");
+});
 
+app.get("/Marketplace", function(req,res){
+  res.render("Marketplace");
+});
 
+// Admin part of dome technologies
+app.get("/dashboard", function(req,res){
+  res.render("customerEntry");
+});
 
+app.get("/blog", function(req,res){
+  res.render("blog");
+});
 
-
+app.get("/reports",function(req,res){
+  res.render("reports");
+});
+app.get("/integration",function(req,res){
+  res.render("integration");
+});
 
 let port = process.env.PORT;
 if (port == null || port == ""){

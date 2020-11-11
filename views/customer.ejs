@@ -1,0 +1,33 @@
+<%- include("partials/header") -%>
+
+<div class="jumbotron mb-0" style="font-family: 'Montserrat', sans-serif;">
+  <div class="container">
+    <h1 class="display-3 fd">Welcome!</h1>
+    <p>What kind of website would you like for your business?</p>
+    <small class="text-info">select from below and/or input other choice</small>
+    <form class="list-group " action="" method="post">
+      <div class="mb-3 list-group-item">
+        <input type="checkbox" name="affiliate" value="" id="Affiliate" class="mr-3 ">
+        <label for="Affiliate" class="mar">Affiliate marketting</label>
+      </div>
+      <div class="mb-3 list-group-item">
+        <input type="checkbox" name="blog" value="" id="blog" class="mr-3 ">
+        <label for="blog" class="mar">Blog </label>
+      </div>
+      <div class="mb-3 list-group-item">
+        <input type="checkbox" name="portfolio" value="" id="portfolio" class="mr-3">
+        <label for="portfolio" class="mar">Portfolio webpage</label>
+      </div>
+      <div class="mb-3 input-group">
+        <input type="text" name="" value="" class="mr-3 form-control " placeholder="Others">
+      </div>
+      <div class="mb-3">
+        <input type="submit" name="" value="submit" class="mr-3 btn btn-success ">
+      </div>
+
+    </form>
+    <p><a class="btn btn-primary btn-lg" href="/myBlog" role="button">Learn more &raquo;</a></p>
+  </div>
+</div>
+
+<%- include("partials/footer") -%>

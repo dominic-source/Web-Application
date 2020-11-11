@@ -1,0 +1,48 @@
+<%- include("partials/dashboardheader") -%>
+
+<div class="aside">
+  <form class="form-inline" action="index.html" method="post">
+    <ul class="list-unstyled">
+      <li>
+        <div class="">
+          <h2 class="my-3 dash">Compose message
+          </h2>
+        </div>
+          <label for="author" class="form-control my-3 mr-3 btn-info">Author's name</label>
+          <input class="form-control my-3" type="text" name="" value="" id="author" placeholder="Author's name"><br>
+          <label for="time" class="btn-info my-3 form-control mr-3">Time</label>
+          <input class="form-control my-3" type="time" id="time" name="" value=""><br>
+      </li>
+
+      <li>
+        <label for="title" class="my-3 form-control mr-3 btn-info">Title</label>
+        <input type="text" name="title" value="" placeholder="Title" id="title" class="my-3 form-control"><br>
+      <div class="child">
+        <h1 style="display:inline;">
+          <span class="text-info plus remove mr-1">-</span>
+          <span class="text-info plus add">+</span>
+        </h1>
+        <label for="content" class="form-control my-3 mr-3 btn-info">Content</label>
+        <textarea class="form-control my-3" name="Content" id="content" rows="8" cols="80" placeholder="Type the text here"></textarea><br>
+      </div>
+        <div class="">
+            <label class="form-control my-3 mr-3 btn-info" for="Pictures">Choose images to upload (.png, .jpg or .jpeg)</label>
+            <input class="form-control my-3 " type="file" id="Pictures" accept=".jpg , .png , .jpeg" name="" value="" multiple><br>
+          </div>
+          <div class="preview">
+            <p>No file currently selected for upload</p>
+          </div>
+      </li>
+      <li class='submit'>
+
+        <input type="submit" class="btn-success form-control my-3 " name="" value="Post to Blog">
+
+      </li>
+    </ul>
+
+
+  </form>
+
+</div>
+
+<%- include("partials/dashboardfooter") -%>

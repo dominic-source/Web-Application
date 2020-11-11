@@ -1,179 +1,192 @@
 <%- include("partials/header") -%>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <a class="navbar-brand dome textcolor" href="#">Dometech</a>
-
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Testimonials <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Offers</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Market Place</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Contact</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search Blog" aria-label="Search">
-      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
-
-<ul class="nav nav-tabs justify-content-center bg-dark" id="myTab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+<ul class="nav nav-tabs justify-content-center bg-dark" style="position:relative;">
+  <li class="nav-item">
+    <a class="nav-link linker active" href="/">Home</a>
   </li>
-  <li class="nav-item" role="presentation">
-    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Blog</a>
+  <li class="nav-item">
+    <a class="nav-link linker" href="/myBlog">Blog</a>
   </li>
-  <li class="nav-item" role="presentation">
-    <a class="nav-link disabled" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">WELCOME!!!</a>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="/">WELCOME!!!</a>
   </li>
 </ul>
-
+<!-- Introduction -->
 <div class="bg-light sweet">
 
   <div class="navigation-pan textcolor">
-    <h1>Move your business higher with our developmental tools.</h1>
+    <h1 class='sup'>Move your business higher with our developmental tools.
+      <a href="/customer" class="btn btn-outline-dark">Start here</a>
+    </h1>
     <p style="margin-bottom:0;">Dometech starts your dream of having a website
       that can serve up to your customers expectation. We are on the lookout not just
       to build the website for your business but to also provide good security measures for your potential customers.
     </p>
   </div>
 </div>
+<!-- End of introduction -->
 
-
+<!-- How we work -->
 <section class="worksection">
   <div class="work">
-    <h2 class="designer workdesign">How we work</h2>
+    <h2 class="designer">How we work</h2>
   </div>
 
-  <div class="row">
+  <div class="row sidespace">
     <div class="col-lg-4 mb-4 col-md-8 col-sm-10">
       <div class="card">
-        <img src="images/image1.jpg" class="card-img-top" alt="...">
+        <img src="images/planWorld.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Planning</h5>
           <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <a href="#" class="btn btn-primary">Visit our Blog</a>
+          <a href="/myBlog" class="btn btn-outline-primary mt-1">Visit our Blog</a>
+          <a href="/customer" class="btn btn-outline-dark mt-1">Hire me</a>
         </div>
       </div>
     </div>
     <div class="col-lg-4 mb-4 col-md-8 col-sm-10">
       <div class="card">
-        <img src="images/image2.jpg" class="card-img-top" alt="...">
+        <img src="images/planBoard.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Design</h5>
           <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <a href="#" class="btn btn-primary">Visit our Blog</a>
-        </div>
+          <a href="/myBlog" class="btn btn-outline-primary mt-1">Visit our Blog</a>
+          <a href="/customer" class="btn btn-outline-dark mt-1">Hire me</a>        </div>
       </div>
     </div>
     <div class="col-lg-4 mb-4 col-md-8 col-sm-10">
       <div class="card">
-        <img src="images/image1.jpg" class="card-img-top" alt="...">
+        <img src="images/projectDevelopment.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Development</h5>
           <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <a href="#" class="btn btn-primary">Visit our Blog</a>
-        </div>
+          <a href="/myBlog" class="btn btn-outline-primary mt-1">Visit our Blog</a>
+          <a href="/customer" class="btn btn-outline-dark mt-1">Hire me</a>        </div>
       </div>
 
     </div>
     <div class="col-lg-4 mb-4 col-md-8 col-sm-10">
       <div class="card">
-        <img src="images/image1.jpg" class="card-img-top" alt="...">
+        <img src="images/security.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Security</h5>
           <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <a href="#" class="btn btn-primary">Visit our Blog</a>
-        </div>
+          <a href="/myBlog" class="btn btn-outline-primary mt-1">Visit our Blog</a>
+          <a href="/customer" class="btn btn-outline-dark mt-1">Hire me</a>        </div>
       </div>
 
     </div>
 
     <div class="col-lg-4 mb-4 col-md-8 col-sm-10">
       <div class="card">
-        <img src="images/image1.jpg" class="card-img-top" alt="...">
+        <img src="images/nurtureIdea.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Production</h5>
           <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <a href="#" class="btn btn-primary">Visit our Blog</a>
-        </div>
+          <a href="/myBlog" class="btn btn-outline-primary mt-1">Visit our Blog</a>
+          <a href="/customer" class="btn btn-outline-dark mt-1">Hire me</a>        </div>
       </div>
 
     </div>
 
   </div>
 </section>
+<!-- End of work section -->
+
 
 <section>
-  <div class="position">
-    <img src="#" alt="">
-    <h1>SEO Ready Code</h1>
-    <p>Ready site that has been optimized for search engine optimization.</p>
-  </div>
+  <div class="row">
 
-  <div class="position rev">
-    <img src="#" alt="">
-    <h1>Responsive development</h1>
-    <p>Responsive on smartphones, tablet, pc and others.</p>
-  </div>
 
-  <div class="position">
-    <img src="#" alt="">
-    <h1>Awesome Feature</h1>
-    <p>Easy-to-use, dynamic colors, grid, video, map and much more.</p>
-  </div>
-  <div class="position rev">
-    <img src="#" alt="">
-    <h1>Full support</h1>
-    <p>A ready support to help you with solutions to problems.</p>
-  </div>
-  <div class="position">
-    <img src="#" alt="">
-    <h1>High customizibility</h1>
-    <p>Customize website in few seconds</p>
-  </div>
-  <div class="position rev">
-    <img src="#" alt="">
-    <h1>up-To-Date Software</h1>
-    <p>Advance Software development</p>
+    <div class="position col-lg-4 col-md-8 col-sm-12 " id="offers">
+      <img src="#" alt="">
+      <h1>SEO Ready Code</h1>
+      <p>Ready site that has been optimized for search engine optimization.</p>
+    </div>
+
+    <div class="col-lg-4 col-md-8 col-sm-12 position rev ">
+      <img src="#" alt="">
+      <h1>Responsive development</h1>
+      <p>Responsive on smartphones, tablet, pc and others.</p>
+    </div>
+
+    <div class="col-lg-4 col-md-8 col-sm-12 position">
+      <img src="#" alt="">
+      <h1>Awesome Feature</h1>
+      <p>Easy-to-use, dynamic colors, grid, video, map and much more.</p>
+    </div>
+    <div class="col-lg-4 col-md-8 col-sm-12 position rev">
+      <img src="#" alt="">
+      <h1>Full support</h1>
+      <p>A ready support to help you with solutions to problems.</p>
+    </div>
+    <div class="col-lg-4 col-md-8 col-sm-12 position">
+      <img src="#" alt="">
+      <h1>High customizibility</h1>
+      <p>Customize website in few seconds</p>
+    </div>
+    <div class="col-lg-4 col-md-8 col-sm-12 position rev">
+      <img src="#" alt="">
+      <h1>up-To-Date Software</h1>
+      <p>Advance Software development</p>
+    </div>
   </div>
 </section>
 
-<section>
-  <div class="">
+<section class="worksection ">
+  <div class="reasons">
     <h1>Few Reasons</h1>
     <h1>Why Choose Us</h1>
   </div>
-  <div class="">
-    <h1>.01</h1>
-    <h3>Clients</h3>
-  </div>
-  <div class="">
-    <h1>.02</h1>
-    <h3>Projects</h3>
-  </div>
 
-  <div class="">
-    <h1>.03</h1>
-    <h3>Reporting & Analysis</h3>
+  <div class="row">
+
+    <div class="col-lg-4 col-md-6 col-sm-12 reshape">
+      <div class="vertical">
+        <h1>.01</h1>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Our Client</h5>
+          <p class="card-text">Lorem ipsum is placeholder text commonly used in the graphic,
+            print, and publishing industries for previewing layouts and visual mockups.</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-4 col-md-6 col-sm-12 reshape">
+      <div class="vertical">
+        <h1>.02</h1>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Projects</h5>
+          <p class="card-text">Lorem ipsum is placeholder text commonly used in the graphic,
+            print, and publishing industries for previewing layouts and visual mockups.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-sm-12 reshape">
+      <div class="vertical">
+        <h1>.03</h1>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Report and Analysis</h5>
+          <p class="card-text">Lorem ipsum is placeholder text commonly used in the graphic,
+            print, and publishing industries for previewing layouts and visual mockups.</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<section>
-  <div class="">
-    <h1>Our Testimonials</h1>
+<section id="testimonials">
+  <div class="imageresize reasons">
+    <h1 class="OT">Our Testimonials</h1>
     <!-- bootstrap carousels  -->
   </div>
   <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
@@ -184,27 +197,28 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="images/image1.jpg" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>First slide label</h5>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        <div class="imageresize">
+          <img src="images/coffeeComputer.jpg" class="d-block w-100 ir" alt="...">
         </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
       </div>
+
       <div class="carousel-item">
-        <img src="images/image2.jpg" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Second slide label</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <div class="imageresize">
+          <img src="images/travel.jpg" class="d-block w-100 ir " alt="...">
         </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </div>
+
       <div class="carousel-item">
-        <img src="images/image2.jpg" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Third slide label</h5>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+        <div class="imageresize">
+          <img src="images/relations.jpg" class="d-block w-100 ir" alt="...">
         </div>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
       </div>
     </div>
+
     <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>
@@ -217,108 +231,42 @@
   <!-- end of bootstrap carousels -->
 </section>
 
-<section>
-  <h1>A New Era of</h1>
-  <h2>Innovation</h2>
-  <p>
-    Always on the lookout fo the high-tech advancements. Build a product that will sell well
-  </p>
-  <button type="button" name="button">Start Now</button>
-  <button type="button" name="button">Learn More</button>
-</section>
-
-<section>
-  <h1>Our News</h1>
+<section class="worksection " id="news">
+  <h1 class="reasons">Our News</h1>
 
   <!-- bootstrap media -->
-  <ul class="list-unstyled">
-    <li class="media">
-      <img src="..." class="mr-3" alt="...">
-      <div class="media-body">
-        <h5 class="mt-0 mb-1">List-based media object</h5>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in
-        faucibus.
-        <h5>VIEW DETAILS <span>></span> </h5>
+  <ul class="list-unstyled res">
+    <li class="media my-4">
+      <img src="images/strategiesDevelopment.jpg" class="mr-2 newsimage" alt="...">
+      <div class="media-body mr-2">
+        <h5 class="mt-0 mb-1 fonter">List-based media object</h5>
+        <p class="OR">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+          <a href="#" class="disp">VIEW DETAILS <span>></span></a>
+        </p>
       </div>
     </li>
     <li class="media my-4">
-      <img src="..." class="mr-3" alt="...">
-      <div class="media-body">
-        <h5 class="mt-0 mb-1">List-based media object</h5>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in
-        faucibus.
-        <h5>VIEW DETAILS <span>></span> </h5>
+      <img src="images/coffeeComputer.jpg" class="mr-2 newsimage" alt="...">
+      <div class="media-body mr-2">
+        <h5 class="mt-0 mb-1 fonter">List-based media object</h5>
+        <p class="OR">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+          <a href="#" class="disp">VIEW DETAILS <span>></span></a>
+        </p>
       </div>
     </li>
-    <li class="media">
-      <img src="..." class="mr-3" alt="...">
-      <div class="media-body">
-        <h5 class="mt-0 mb-1">List-based media object</h5>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in
-        faucibus.
-        <h5>VIEW DETAILS <span>></span> </h5>
+    <li class="media my-4">
+      <img src="images/studyRead.jpg" class="mr-2 newsimage" alt="...">
+      <div class="media-body mr-2">
+        <h5 class="mt-0 mb-1 fonter mr-2">List-based media object</h5>
+        <p class="OR">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+          <a href="#" class="disp">VIEW DETAILS <span>></span></a>
+        </p>
       </div>
     </li>
   </ul>
 
   <!-- End of bootstrap media -->
 </section>
-
-
-<section>
-  <div class="">
-    <h1>ABOUT US</h1>
-    <p>
-      jkdjavkdsa k we are ere for u kfksd oj akmfm k jj ask
-    </p>
-    <a>facebook</a>
-    <a>twitter</a>
-    <a>linkedin</a>
-    <a>instagram</a>
-    <a>youtube</a>
-
-  </div>
-
-  <div class="">
-    <h1>RECENT POST</h1>
-
-    <p><span>></span>
-      jkdjavkdsa k we are ere for u kfksd oj akmfm k jj ask
-    </p>
-
-    <p><span>></span>
-      jkdjavkdsa k we are ere for u kfksd oj akmfm k jj ask
-    </p>
-
-    <p><span>></span>
-      jkdjavkdsa k we are ere for u kfksd oj akmfm k jj ask
-    </p>
-
-  </div>
-  <div class="">
-    <h1>CONTACT US</h1>
-    <a>font awesom</a>
-    <p>
-      Address:
-    </p>
-
-    <h1>CONTACT US</h1>
-    <a>font awesom</a>
-    <p>
-      Address:
-    </p>
-
-    <h1>CONTACT US</h1>
-    <a>font awesom</a>
-    <p>
-      Address:
-    </p>
-  </div>
-  <div class="">
-    <small>COPYRIGHT 2020 Dometech</small>
-  </div>
-</section>
-
 
 
 <%- include("partials/footer") -%>
