@@ -17,16 +17,22 @@
   "author": "Chinonso Morba",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
+    "encryption": "0.0.1",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "lodash": "^4.17.20",
+    "md5": "^2.3.0",
     "mongoose": "^5.10.11",
     "mongoose-findorcreate": "^3.0.0",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^6.0.1"
+    "passport-local-mongoose": "^6.0.1",
+    "randomstring": "^1.1.5",
+    "uuid": "^8.3.1"
   }
 }

@@ -1,0 +1,59 @@
+<%- include("partials/header") -%>
+
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+<!-- Custom styles for this template -->
+<link href="css/signin.css" rel="stylesheet">
+<link rel="stylesheet" href="css/bootstrap-social.css">
+<link rel="stylesheet" href="css/socials.css">
+
+<body>
+  <div class="row">
+
+    <div class="col-lg-5 col-md-8 col-sm-8">
+
+      <form class="form-signin shadow " method="post" action="/register">
+        <h1 class="text-center text-dark">Register</h1>
+        <input type="text" class="form-control mb-3" name="username" placeholder="Username" required autofocus>
+        <input type="text" class="form-control mb-3" name="name" placeholder="Name" required>
+        <input type="text" class="form-control mb-3" name="surname" placeholder="Surname" required>
+        <input type="email" class="form-control mb-3" name="email" placeholder="Email address" required>
+        <input type="password" class="form-control mb-3" name="password" placeholder="Password" required>
+        <input type="password" class="form-control mb-3" placeholder="Password" required>
+        <input type="submit" class="form-control btn-outline-success mb-3" value="submit" name="submit">
+
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-lg-5 col-md-8 col-sm-8">
+      <div class="card card-social">
+        <div class="card-body">
+          <a class="btn btn-block btn-social btn-google" href="/auth/google" role="button">
+            <i class="fab fa-google"></i>
+            Sign Up with Google
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <%- include("partials/footer") -%>

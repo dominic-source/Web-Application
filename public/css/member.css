@@ -1,0 +1,33 @@
+.memberid {
+  background-color:#5ca4ca;
+  font-family: 'Space Mono', monospace;
+  color:#f4f4f4;
+}
+
+.memberid h5{
+  font-size:20px;
+  line-height: 2;
+}
+
+.check {
+  border-radius:100%;
+  border:7px solid #2b2e4a;
+  box-shadow: 1px 1px 8px 2px #74d2ff;
+  width:100px;
+  height:100px;
+  text-align:center;
+  background-color: #74d2ff;
+  margin:20px;
+}
+.check>h5{
+  font-size:12px;
+}
+.sign{
+  margin-top:17px;
+  margin-bottom:25px;
+}
+.display{
+  display:flex;
+  padding-bottom:40px
+
+}

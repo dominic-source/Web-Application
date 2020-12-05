@@ -1,0 +1,31 @@
+<%- include("partials/header") -%>
+<link rel="stylesheet" href="/css/member.css">
+<div class="jumbotron mb-0" style="font-family: 'Montserrat', sans-serif;">
+  <div class="container">
+    <h1 class="display-3 fd">Welcome <%= customer.nameOfCustomer%>!</h1>
+    <a href="/images/beauty.jpg" class="btn btn-sm btn-success" download>Download your project</a>
+  </div>
+</div>
+<div class="memberid">
+  <div class="ml-5 mx-5 pt-5">
+    <h5>Username:<%= customer.nameOfCustomer %></h5>
+    <h5>Transaction_id:<%= customer.transactionId %></h5>
+    <h5>Project name:<%= customer.websiteType %></h5>
+    <h5>Date of request:<%= customer.time %></h5>
+    <h5>Delivered:<%= customer.delivered %></h5>
+  </div>
+  <div class="display">
+    <div class="check">
+      <h1 class="sign">❌</h1>
+      <h5>Not delivered</h5>
+    </div>
+    <div class="check">
+      <h1 class="sign">✔</h1>
+      <h5>Delivered</h5>
+
+    </div>
+  </div>
+  <a href="/logout" class="btn btn-sm btn-danger">logout</a>
+
+</div>
+<%- include("partials/footer") -%>

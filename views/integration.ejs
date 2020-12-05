@@ -1,25 +1,32 @@
 <%- include("partials/dashboardheader") -%>
 
 <div class="aside">
-  <form class="form-inline" action="index.html" method="post">
+  <form class="form-inline" action="/integration" method="post">
     <ul class="list-unstyled">
-      <li>
+      <li class="hide">
           <h2 class="my-3 dash">Manually add Api <span class="text-info plus">+</span>
-          <div class="hide">
+          <div class="">
           <label for="apiName" class="form-control my-3 mr-3 btn-info">Api name</label>
-          <input class="form-control my-3" type="text" name="" value="" id="apiName" placeholder="Api Name"><br>
+          <input class="form-control my-3" type="text" name="apiNames" value="" id="apiName" placeholder="Api Name" required><br>
+          <label for="apiImageAddresses" class="form-control my-3 mr-3 btn-info">Api image address</label>
+          <input class="form-control my-3" type="text" name="apiImageAddresses" value="" id="apiImageAddress" placeholder="Api image address" required><br>
           <label for="apiAddress" class="btn-info my-3 form-control mr-3">Api link address</label>
-          <input class="form-control my-3" type="text" id="apiAddress" name="" value="" placeholder="Api Address"><br>
-        </div>
+          <input class="form-control my-3" type="text" id="apiAddress" name="apiAddresses" value="https//:" placeholder="Api Address" required><br>
+          <label for="apiCompanySupplier" class="btn-info my-3 form-control mr-3">Api company Name</label>
+          <input class="form-control my-3" type="text" id="apiCompanySupplier" name="apiCompanySupplier" value="" placeholder="Api Company Supplier" required><br>
+
+        </div><hr style="background-color:#f4f4f4">
+
       </li>
 
       <li class='submit'>
         <input type="submit" class="btn-success form-control my-3 " name="" value="Save api">
+
       </li>
 
     </ul>
   </form>
 
 </div>
-
+<script src="js/integration.js"></script>
 <%- include("partials/dashboardfooter") -%>

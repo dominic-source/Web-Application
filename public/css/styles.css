@@ -75,7 +75,7 @@
   border-radius: 5px;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
-  box-shadow: 3px 3px 7px 2px #515070;
+  box-shadow: 0.1px 0.1px 7px 1px #515070;
   line-height: 1.5;
   margin: 30px 30px;
   font-family: 'Montserrat', sans-serif;
@@ -124,12 +124,15 @@
 
 /* Testimonials */
 .imageresize {
-  width: 30rem;
+  width: 22rem;
   margin: 30px auto 30px auto;
+
 }
 
 .ir {
-  border-radius: 100%;
+  border-radius:100%;
+  height:22rem;
+  border:2px solid #2a3d66;
 }
 
 .carousel-item p {
@@ -290,7 +293,7 @@ hr {
   }
 
   .disp {
-    width: 5rem;
+    width: 6rem;
   }
 
   .card-text {
@@ -298,7 +301,7 @@ hr {
   }
 
   .fonter {
-    font-size: 0.5rem;
+    font-size: 1rem;
     width: 7rem;
   }
 
@@ -315,10 +318,15 @@ hr {
     width: 15rem;
     margin-bottom: 10px;
   }
+  .ir {
+    border-radius:100%;
+    height:15rem;
+  }
 
   .OR {
     font-size: 10px;
     width: 11em;
+    font-weight: light;
   }
 
   .carousel-item p {

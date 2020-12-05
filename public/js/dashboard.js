@@ -1,5 +1,5 @@
 /* globals Chart:false, feather:false */
-
+//jshint esversion:6
 (function () {
   'use strict'
 

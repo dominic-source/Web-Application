@@ -135,3 +135,21 @@ h1, h2, h3, h4, h5, h6 {
 .text-white {
   font-size: 0.75rem;
 }
+.domparser img{
+  height:70%;
+  width:70%;
+}
+.domparser {
+  border: 3px #2b2e4a solid;
+  border-top: 0.9px;
+  border-bottom: 0.9px;
+  border-right: 0.9px;
+  color: #515070;
+  background-color:#f4f4f4;
+  margin: 15px;
+  font-family: 'Montserrat', sans-serif;
+}
+.domparser p{
+  padding-left:10px;
+  line-height:2;
+}

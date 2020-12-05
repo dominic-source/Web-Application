@@ -33,59 +33,35 @@
       </thead>
 
       <tbody>
+        <% customer.forEach(function(item){ %>
         <tr class="sidecol">
           <td class="mx-3 spacing">
-            1
+          <%=  item._id %>
           </td>
           <td class="mx-3 spacing">
-            Chinonso Morba
+          <%=  item.customer %>
           </td>
           <td class="mx-3 spacing">
-            chinonsodomnic@gmail.com
+          <%=  item.customer%>
           </td>
           <td class="mx-3 spacing">
-              4rgjnimaiokiee
+            <%=  item.customer %>
             </td>
           <td class="mx-3 spacing">
-            Affiliate type of site
+          <%=  item.customer %>
           </td>
           <td class="mx-3 spacing">
-            true
+        <%=    item.customer %>
           </td>
           <td class="mx-3 spacing">
-            Today
+          <%=  item.customer %>
           </td>
           <td class="mx-3 spacing">
-            true
-          </td>
+        <%=  item.customer %>
+          </td> --> %>
         </tr>
 
-        <tr class="sidecol">
-          <td class="mx-3 spacing">
-            2
-          </td>
-          <td class="mx-3 spacing">
-            Chinonso Morba
-          </td>
-          <td class="mx-3 spacing">
-            chinonsodomnic@gmail.com
-          </td>
-          <td class="mx-3 spacing">
-              4rgjnimaiokiee
-            </td>
-          <td class="mx-3 spacing">
-            Affiliate type of site
-          </td>
-          <td class="mx-3 spacing">
-            true
-          </td>
-          <td class="mx-3 spacing">
-            Today
-          </td>
-          <td class="mx-3 spacing">
-            true
-          </td>
-        </tr>
+        <%  }); %>
 
       </tbody>
     </table>

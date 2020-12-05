@@ -3,9 +3,7 @@
     <div class="col-lg-4 col-md-6 col-sm-12 shape text-muted">
       <h1 class="fotfont">ABOUT US</h1>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore magna reprehenderit
-        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+        Dome technologies is a fast developing company, hoping to bring her customers dream to life. </p>
       <div>
         <span><a href="#" class="cont"><i class="fab fa-facebook-f"></i></a></span>
         <span><a href="#" class="cont"><i class="fab fa-linkedin-in"></i></a></span>
@@ -19,12 +17,10 @@
     <div class="col-lg-4 col-md-6 col-sm-12 shape text-muted">
       <h1 class="fotfont">RECENT POST</h1>
       <div class="leftrecent ">
-        <p><span class="angle"> > </span> Motion Animation And VR Headset </p>
-        <hr>
-        <p><span class="angle"> > </span> Awesome Tips to Become CEO of Big Network StartUp</p>
-        <hr>
-        <p><span class="angle"> > </span> Top 5 Amazing changing for the social Media Industry </p>
-
+    <% blogPost.forEach(function(item,index){ if(index === blogPost.length-1 ||index === blogPost.length-2||index === blogPost.length-3){ %>
+          <p><span class="angle"> > </span><%= item.title %></p>
+          <hr>
+      <%  }}); %>
       </div>
 
     </div>
@@ -33,7 +29,7 @@
 
       <div class="">
         <h5><i class="fas fa-map-marker-alt con"></i> Address:</h5>
-        <p>BLOCK 5B OFF Sokoto road, new bussa Niger State.</p>
+        <p>Ondo state </p>
       </div>
 
       <div class="">
@@ -53,14 +49,11 @@
       <li class="list-inline-item "><a href="#">Privacy</a></li>
       <li class="list-inline-item"><a href="#">Terms</a></li>
       <li class="list-inline-item"><a href="#">Support</a></li>
-      <li><a href="/signin" class="btn btn-primary">Sign in</a></li>
+      <li><a href="/login" class="btn btn-primary">login</a></li>
     </ul>
 
     </footer>
 </section>
-
-
-
 
 <!-- Java script code link for bootstrap-->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -69,5 +62,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="js/form-validation.js"></script>
 <script src="js/dashboard.js"></script>
+
 </body>
 </html>
