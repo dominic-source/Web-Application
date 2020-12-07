@@ -46,3 +46,18 @@ cursor:copy;
   color:#17a2b8;
   text-shadow: 2px 2px 20px #17a2b8;
 }
+@media(max-width:499px){
+
+  .hide{
+    visibility:collapse;
+  }
+  .asideleft{
+    width:3.5rem;
+    margin-right:8px;
+
+  }
+  .aside{
+  margin-left:0;
+  }
+
+}

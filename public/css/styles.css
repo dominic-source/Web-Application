@@ -68,6 +68,12 @@
 }
 
 /* SEO ready area */
+.fontColor{
+  color:#6a2c70;
+  margin-left:25%;
+  margin-top:10%;
+  margin-bottom:10%;
+}
 .position {
   border: #515070 medium solid;
   background-color: #f4f4f4;
@@ -76,14 +82,14 @@
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   box-shadow: 0.1px 0.1px 7px 1px #515070;
-  line-height: 1.5;
+  line-height: 2;
   margin: 30px 30px;
   font-family: 'Montserrat', sans-serif;
 }
 
 .position h1 {
-  font-size: 0.7rem;
-  font-weight: bolder;
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 .rev {
@@ -215,7 +221,7 @@
 
 .card-text {
   font-family: 'Montserrat', sans-serif;
-  color: #1a1c20;
+  color: #343a40;
 }
 
 .card-title {
@@ -298,6 +304,7 @@ hr {
 
   .card-text {
     font-size: 10px;
+    font-weight: 600;
   }
 
   .fonter {
@@ -350,13 +357,15 @@ hr {
   .position {
     width: 60%;
     margin: 15px;
-    font-size: 0.4rem;
+    font-size: 0.7rem;
     margin-left: auto;
     margin-right: auto;
+    font-weight: 600;
   }
 
   .textcolor p {
     font-size: 15px;
+    font-weight: bold;
   }
 
   .reshape {
@@ -366,7 +375,7 @@ hr {
 
   .designer {
     text-align: left;
-    font-size: 20px;
+    font-size: 30px;
     margin-left: 30px;
   }
 

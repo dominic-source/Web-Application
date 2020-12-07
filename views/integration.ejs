@@ -1,21 +1,38 @@
 <%- include("partials/dashboardheader") -%>
-
+<style>
+@media(max-width:499px){
+  .form-control {
+    font-size:0.6rem;
+    width:80%;
+  }
+  .dash{
+    font-size: 1rem;
+  }
+  .mb-3,.my-3{
+    margin-bottom:0rem!important;
+  }
+  .mt-3,.my-3{
+    margin-top:0rem!important;
+  }
+}
+</style>
 <div class="aside">
   <form class="form-inline" action="/integration" method="post">
     <ul class="list-unstyled">
-      <li class="hide">
-          <h2 class="my-3 dash">Manually add Api <span class="text-info plus">+</span>
+      <li class="hidden">
+        <h2 class="my-3 dash">Manually add Api <span class="text-info plus">+</span>
           <div class="">
-          <label for="apiName" class="form-control my-3 mr-3 btn-info">Api name</label>
-          <input class="form-control my-3" type="text" name="apiNames" value="" id="apiName" placeholder="Api Name" required><br>
-          <label for="apiImageAddresses" class="form-control my-3 mr-3 btn-info">Api image address</label>
-          <input class="form-control my-3" type="text" name="apiImageAddresses" value="" id="apiImageAddress" placeholder="Api image address" required><br>
-          <label for="apiAddress" class="btn-info my-3 form-control mr-3">Api link address</label>
-          <input class="form-control my-3" type="text" id="apiAddress" name="apiAddresses" value="https//:" placeholder="Api Address" required><br>
-          <label for="apiCompanySupplier" class="btn-info my-3 form-control mr-3">Api company Name</label>
-          <input class="form-control my-3" type="text" id="apiCompanySupplier" name="apiCompanySupplier" value="" placeholder="Api Company Supplier" required><br>
+            <label for="apiName" class="form-control my-3 mr-3 btn-info hide">Api name</label>
+            <input class="form-control my-3" type="text" name="apiNames" value="" id="apiName" placeholder="Api Name" required><br>
+            <label for="apiImageAddresses" class="form-control my-3 mr-3 btn-info hide">Api image address</label>
+            <input class="form-control my-3" type="text" name="apiImageAddresses" value="" id="apiImageAddress" placeholder="Api image address" required><br>
+            <label for="apiAddress" class="hide btn-info my-3 form-control mr-3">Api link address</label>
+            <input class="form-control my-3" type="text" id="apiAddress" name="apiAddresses" value="https//:" placeholder="Api Address" required><br>
+            <label for="apiCompanySupplier" class="btn-info my-3 form-control mr-3 hide">Api company Name</label>
+            <input class="form-control my-3" type="text" id="apiCompanySupplier" name="apiCompanySupplier" value="" placeholder="Api Company Supplier" required><br>
 
-        </div><hr style="background-color:#f4f4f4">
+          </div>
+          <hr style="background-color:#f4f4f4">
 
       </li>
 

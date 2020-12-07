@@ -1,28 +1,35 @@
 <%- include ("partials/header") -%>
 <div class="jumbotron">
-  <% blogPost.forEach(function(item){%>
-  <div class="blog-post">
-    <h2 class="blog-post-title" id=<%= item._id %>><%- item.title %></h2>
-    <p class="blog-post-meta"><%- item.time %>&nbsp; by &nbsp;<%- item.authorName %></p>
-    <div class="domparser">
-      <p>
-        <%- item.content.substr(0,500) %>
-        <small><a href="/myBlog/message/<%= item._id %>">Read more...</a></small>
-        <small> views <%= item.views %> </small>
-      </p>
+  <% if (noItem) { %>
+    <h1><%= noItem %></h1>
+    <a href="/myBlog"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp; go back</a>
+
+  <% } else{ %>
+    <% blogPost.forEach(function(item){%>
+    <div class="blog-post">
+      <h2 class="blog-post-title" id=<%= item._id %>><%- item.title %></h2>
+      <p class="blog-post-meta"><%- item.time %>&nbsp; by &nbsp;<%- item.authorName %></p>
+      <div class="domparser">
+        <p>
+          <%- item.content.substr(0,500) %>
+          <small><a href="/myBlog/message/<%= item._id %>">Read more...</a></small>
+          <small> views <%= item.views %> </small>
+        </p>
+      </div>
+
+      <small class="text-danger" style="display:block;">
+        If this was helpful, you can support the developer by donating.
+        <a href="/products" class="btn btn-danger ml-sm-3 ml-3 btn-sm" name="button">Donate<a>&nbsp;<small>OR</small>&nbsp;
+            <a href="/register" class="btn btn-outline-dark mr-sm-3 mr-3 btn-sm">Hire me</a>
+      </small>
     </div>
 
-    <small class="text-danger" style="display:block;">
-      If this was helpful, you can support the developer by donating.
-      <a href="/products" class="btn btn-danger ml-sm-3 ml-3 btn-sm" name="button">Donate<a>&nbsp;<small>OR</small>&nbsp;
-          <a href="/register" class="btn btn-outline-dark mr-sm-3 mr-3 btn-sm">Hire me</a>
-    </small>
-  </div>
 
+    <hr style="background-color:#e9ecef;">
+    <!-- /.blog-post -->
+    <% }); %>
+<%  } %>
 
-  <hr style="background-color:#e9ecef;">
-  <!-- /.blog-post -->
-  <% }); %>
 </div>
 <!-- Java script code link for bootstrap-->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -32,4 +39,3 @@
 </body>
 
 </html>
-<%- include ("partials/footer") -%>

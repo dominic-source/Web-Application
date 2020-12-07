@@ -365,7 +365,7 @@ app.post("/blog", function(req, res) {
 
   const blog = new Blog({
     authorName: req.body.author,
-    title: _.lowerCase(req.body.title),
+    title: _.startCase(req.body.title),
     content: req.body.content,
     time: getDate.getDate(),
     imageurl: req.body.url,
@@ -461,13 +461,13 @@ app.get("/myBlog/message/:param", function(req, res) {
 
 app.post("/search", function(req, res) {
   Blog.find({
-    title: _.lowerCase(req.body.blogtitle)
+    title: _.startCase(req.body.blogtitle)
   }, function(err, foundItem) {
     if (err) {
       console.log(err);
     } else {
       if (foundItem.length === 0) {
-        res.redirect("/myBlog");
+        res.render("searchBlog",{noItem:"Search not found!"});
       } else {
         res.render("searchBlog", {
           blogPost: foundItem
