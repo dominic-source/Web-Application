@@ -1,0 +1,120 @@
+.adpaypol{
+  width:20rem;
+  margin:40px auto 20px auto;
+}
+
+.adpaypol2{
+  width:9.7rem;
+  margin-right:10px;
+}
+
+.adpaypol3{
+  width:20rem;
+  margin:10px auto 10px auto;
+}
+
+.bold{
+  font-weight: bold;
+}
+.card{
+  text-decoration:none;
+  list-style-type: none;
+  font-weight:bold;
+  background-color: #e3f6f5;
+  padding-top:20px;
+  padding-bottom:20px;
+  box-shadow: 0.5px 0.5px 2px;
+}
+
+hr{
+  background-color:#cbf1f5;
+}
+
+.link{
+  color:#393e46;
+}
+
+.link:active{
+  opacity:0.5;
+}
+
+.link:hover{
+  text-decoration-line:none;
+}
+
+.margincenter{
+  margin:15px auto 10px auto;
+  text-align:center;
+}
+
+.montserrat{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.paypol{
+  width:13rem;
+  font-size:15px;
+  box-sizing: border-box;
+  background-color:#cbf1f5;
+  border:0.5px solid #e3d9ca;
+  border-radius:5px;
+  padding:10px;
+  font-weight: bold;
+}
+
+.paypol:active{
+  opacity:0.5;
+}
+
+.paystack{
+  padding-top:40px;
+  padding-bottom:10px;
+  color:limegreen;
+  font-weight:bold;
+  font-size:15px;
+}
+
+.text{
+  color:grey;
+  font-weight:lighter;
+}
+
+.ubuntu{
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.widthpay{
+  width:18rem;
+}
+
+@media (max-width:499px){
+  .adpaypol2{
+    width:4.7rem;
+    margin-right:7px;
+    font-size:13px;
+  }
+
+  .adpaypol3{
+    width:10rem;
+    margin:5px auto 5px auto;
+    font-size:13px;
+  }
+
+  .link{
+    font-size:14px;
+  }
+
+  .paystack{
+    font-size:13px;
+  }
+  .paypol{
+    width:9rem;
+    font-size:10px;
+  }
+
+  .text{
+    font-size: 12px;
+    padding-right:10px;
+  }
+
+}

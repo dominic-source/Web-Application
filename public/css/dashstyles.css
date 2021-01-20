@@ -1,8 +1,8 @@
 .asideleft{
-  width:15rem;
+  width:8rem;
   float:left;
   clear:left;
-  margin-right:40px;
+  margin-right:10px;
   height:100rem;
   border:5px #17a2b8 solid;
   border-top:0;
@@ -33,31 +33,130 @@ cursor:copy;
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
 }
+
 .spacing{
   font-family: 'Roboto Condensed', sans-serif;
   text-align:left;
   padding:5px 10px 5px 20px;
+  font-size:11px;
 }
+
 .doc{
   color:#e9ecef;
 }
+
 .doc:hover{
   text-decoration: none;
   color:#17a2b8;
   text-shadow: 2px 2px 20px #17a2b8;
 }
-@media(max-width:499px){
 
+.adjform{
+  width:60%;
+}
+.adjust{
+  overflow-x:scroll;
+  width:78%;
+}
+.areYouSureColor{
+  background-color:#f7f2e7;
+  border:1px red dashed;
+  border-radius: 10px;
+  width:12.5rem;
+  height:6.5rem;
+  text-align:center;
+  position:absolute;
+  line-height: 2;
+  display:none;
+}
+
+.reducevisibility{
+  opacity:0.4;
+}
+
+.visible{
+  opacity:1.0;
+  display:inherit;
+}
+
+.viewMe{
+  position:fixed;
+  left:5rem;
+  top:25%;
+  display:inherit;
+  width:75%;
+  overflow: scroll;
+  height:75%;
+  box-shadow: 0.5px 0.5px 10px lightgreen;
+}
+
+.laterView{
+  opacity:0.5;
+  box-shadow:0.5px 0.5px 10px lightgreen;
+}
+@media(max-width:800px){
+  .adjust{
+    overflow-x:scroll;
+    width:60%;
+  }
+}
+@media(max-width:700px){
+  .adjust{
+    overflow-x:scroll;
+    width:55%;
+  }
+}
+@media(max-width:600px){
+  .adjust{
+    overflow-x:scroll;
+    width:45%;
+  }
+}
+@media(max-width:499px){
   .hide{
     visibility:collapse;
   }
-  .asideleft{
-    width:3.5rem;
-    margin-right:8px;
+  .viewMe{
+    left:1rem;
+    top:20%;
+    width:90%;
 
   }
+  .asideleft{
+    width:2rem;
+    margin-right:8px;
+  }
+
   .aside{
   margin-left:0;
   }
 
+  .adjust{
+    overflow-x:scroll;
+    font-size:10px;
+    width:25em;
+  }
+
+  .areYouSureColor{
+    width:12.5rem;
+    height:6.5rem;
+    left:20px;
+    top:50%;
+  }
+
+}
+
+
+@media(max-width:320px){
+  .adjust{
+    overflow-x:scroll;
+    width:22em;
+  }
+}
+
+@media(max-width:300px){
+  .adjust{
+    overflow-x:scroll;
+    width:20em;
+  }
 }

@@ -12,11 +12,23 @@
 .linker {
   color: #e9ecef;
 }
+.link{
+  color:#393e46;
+}
 
+.link:active{
+  opacity:0.5;
+}
+
+.link:hover{
+  text-decoration-line:none;
+}
 .linker:hover {
   color: #f4f4f4;
 }
-
+.bold{
+  font-weight: bold;
+}
 /* Introduction */
 .navigation-pan {
   text-align: left;
@@ -30,7 +42,9 @@
 }
 
 .textcolor {
-  color: #2b2e4a;
+  color:#537780;
+  font-weight: bold;
+
 }
 
 .dometech:hover {
@@ -40,6 +54,8 @@
 .sweet {
   margin-bottom: 0;
   font-family: 'Montserrat', sans-serif;
+  background-image:url("/images/strategiesDevelopment.jpg")
+
 }
 
 /* How we work */
@@ -69,7 +85,7 @@
 
 /* SEO ready area */
 .fontColor{
-  color:#6a2c70;
+  color:#07689f;
   margin-left:25%;
   margin-top:10%;
   margin-bottom:10%;
@@ -81,7 +97,7 @@
   border-radius: 5px;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
-  box-shadow: 0.1px 0.1px 7px 1px #515070;
+  box-shadow: 0.1px 0.1px 10px 1px #f4f4f4;
   line-height: 2;
   margin: 30px 30px;
   font-family: 'Montserrat', sans-serif;
@@ -132,9 +148,13 @@
 .imageresize {
   width: 22rem;
   margin: 30px auto 30px auto;
-
 }
 
+.imageresized{
+  width: 20rem;
+  height:10rem
+  margin:10px 30px 10px 30px;
+}
 .ir {
   border-radius:100%;
   height:22rem;
@@ -274,6 +294,9 @@ hr {
   font-family: 'Montserrat', sans-serif;
   font-size: 3rem;
 }
+.OR>h3{
+  font-size:15px;
+}
 
 @media (max-width:499px) {
   .res {
@@ -308,7 +331,7 @@ hr {
   }
 
   .fonter {
-    font-size: 1rem;
+    font-size: 0.7rem;
     width: 7rem;
   }
 
@@ -325,6 +348,11 @@ hr {
     width: 15rem;
     margin-bottom: 10px;
   }
+  .imageresized{
+    width: 10rem;
+    height:7.5rem
+    margin:5px 10px 5px 10px;
+  }
   .ir {
     border-radius:100%;
     height:15rem;
@@ -334,6 +362,9 @@ hr {
     font-size: 10px;
     width: 11em;
     font-weight: light;
+  }
+  .OR>h3{
+    font-size:10px;
   }
 
   .carousel-item p {

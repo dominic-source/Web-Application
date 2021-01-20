@@ -17,33 +17,67 @@
   }
 </style>
 <!-- Custom styles for this template -->
-<link href="css/signin.css" rel="stylesheet">
-<link rel="stylesheet" href="css/bootstrap-social.css">
-<link rel="stylesheet" href="css/socials.css">
+<link href="/css/signin.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/bootstrap-social.css">
+<link rel="stylesheet" href="/css/socials.css">
 
 <body>
   <div class="row">
 
     <div class="col-lg-5 col-md-8 col-sm-8">
 
-      <form class="form-signin shadow " method="post" action="/register">
+      <form class="form-signin shadow needsValidation" method="post" action="/register" novalidate>
         <h1 class="text-center text-dark">Register</h1>
-        <input type="text" class="form-control mb-3" name="username" placeholder="Username" required autofocus>
-        <input type="text" class="form-control mb-3" name="name" placeholder="Name" required>
-        <input type="text" class="form-control mb-3" name="surname" placeholder="Surname" required>
-        <input type="email" class="form-control mb-3" name="email" placeholder="Email address" required>
-        <input type="password" class="form-control mb-3" name="password" placeholder="Password" required>
-        <input type="password" class="form-control mb-3" placeholder="Password" required>
-        <input type="submit" class="form-control btn-outline-success mb-3" value="submit" name="submit">
-
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
+        <div class="mb-3">
+          <span class="text-danger">*</span>
+          <input type="text" class="form-control " name="username" placeholder="Username" required autofocus>
+          <span class="toValidate text-success"><%= words %></span>
+          <div class="invalid-feedback">Username is required</div>
         </div>
+        <div class="mb-3">
+          <span class="text-danger">*</span>
+          <input type="text" class="form-control " name="name" placeholder="First Name" required>
+          <div class="invalid-feedback">First name is required</div>
+        </div>
+        <div class="mb-3">
+          <span class="text-danger">*</span>
+          <input type="text" class="form-control " name="surname" placeholder="Last Name" required>
+          <div class="invalid-feedback ">Last name is required</div>
+        </div>
+        <div class="mb-3">
+          <span class="text-danger">*</span>
+          <input type="email" class="form-control " name="email" placeholder="Email address" required>
+          <span class="toValidate text-success"><%= email %></span>
+          <div class="invalid-feedback">Email address is required</div>
+        </div>
+        <div class="mb-3">
+          <span class="text-danger">*</span>
+          <input type="text" class="form-control " name="organisation" placeholder="Company/Organisation" required>
+          <div class="invalid-feedback">Company or Organisational name  is required</div>
+        </div>
+        <div class="mb-3">
+          <div class="toValidate text-success" id="danger">
+            Password must Not be less than 8 characters and not more than 24 characters, should have atleast a capital letter, small letter, number and any one or more of these characters(#,$,%,*,?,_,!,@).
+            <span class="text-danger">*</span>
+          </div>
+          <input type="password" class="form-control " id="password1" name="password" placeholder="Password" required minlength="6" maxlength="24">
+          <div class="invalid-feedback">password is required</div>
+        </div>
+        <div class="mb-3">
+          <span class="text-danger">*</span>
+          <input type="password" class="form-control " id="password2" placeholder="Confirm Password" name="password2" required minlength="6" maxlength="12">
+          <div class="invalid-feedback text-danger mb-3">Confirmation password is required</div>
+          <div class="invis toValidate text-success" id="Match">
+            Congratulations! Your Passwords Matched, keep it secret.
+          </div>
+          <div class="invis toValidate text-info" id="noMatch">
+            Password does not Match!!!
+          </div>
+        </div>
+        <script src="/js/registeration_validation.js"></script>
+        <input type="submit" class="form-control btn-outline-success mb-3" value="submit" name="submit">
       </form>
     </div>
-
     <div class="col-lg-5 col-md-8 col-sm-8">
       <div class="card card-social">
         <div class="card-body">
@@ -56,4 +90,5 @@
 
     </div>
   </div>
+
   <%- include("partials/footer") -%>

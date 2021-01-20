@@ -1,0 +1,88 @@
+<%- include("partials/header") -%>
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+
+<body class="bg-light ">
+  <h3 class="montserrat margincenter paystack">Input information below!</h3>
+
+  <form id="paymentForm" method="post" action='/payment'>
+    <div class="adpaypol3">
+      <label for="cc-email">Email Address</label>
+      <input type="email" name="emailAddress" id="cc-email" class="form-control" value="" required autofocus placeholder="Email Address">
+    </div>
+
+    <!-- <div class="adpaypol3">
+      <label for="cc-number">Card number</label>
+      <input type="text" name="" id="cc-number" class="form-control" maxlength="19" minlength="19" value="" required autofocus placeholder="0000 0000 0000 0000">
+    </div>
+
+    <div class="adpaypol3" style="display:flex;">
+      <div class="">
+        <label for="cc-expiration">Expiration</label>
+        <input type="text" name="" id="cc-expiration" class="form-control adpaypol2" maxlength="5" minlength="5" value="" required placeholder="MM/YY">
+      </div>
+
+      <div class="">
+        <label for="cc-cvv">CVV</label>
+        <input type="text" name="" id="cc-cvv" class="form-control adpaypol2" maxlength="3" minlength="3" value="" required placeholder="e.g 456">
+      </div>
+    </div> -->
+
+    <div class="adpaypol3" style="display:flex;">
+
+      <div class="">
+        <label for="cc-currency">Currency</label>
+        <select class="form-control custom-select d-block adpaypol2" id="cc-currency" name="currency">
+          <option value="NGN">NGN</option>
+          <option value="USD">USD</option>
+        </select>
+      </div>
+
+      <div class="">
+        <label for="cc-amount">Amount</label>
+        <input type="text" name="amount" id="cc-amount" class="form-control adpaypol2" value="" required placeholder="Amount">
+      </div>
+
+    </div>
+
+    <div class="margincenter">
+      <button type="submit" class="paypol mt-1 widthpay montserrat bold" onClick="payWithPaystack()" style="background-color:#28a745; color:white;" name="button">Pay with Paystack</button>
+
+    </div>
+  </form>
+<script src="https://js.paystack.co/v1/inline.js" charset="utf-8"></script>
+
+  <div>
+    <!-- <a href="/payment2" class="link">
+      <h3 class="paypol margincenter mt-5 widthpay"><i class="fa fa-chain-broken" aria-hidden="true"></i>&nbsp; Change Payment Method </h3>
+    </a> -->
+    <a href="/myBlog" class="link">
+      <h3 class="paypol margincenter"><i class="fa fa-times" aria-hidden="true"></i> Cancel Payment </h3>
+    </a>
+    <p class="margincenter mt-5 my-5"><i class="fa fa-lock" aria-hidden="true"></i> <span class="montserrat ">Secured by</span> <strong class="ubuntu">paystack</strong></p>
+  </div>
+
+
+
+  <!-- Java script code link for bootstrap-->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> <!-- jquery code link -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+
+</html>

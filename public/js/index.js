@@ -22,7 +22,7 @@ function buttons(name, type, blogtopic) {
   document.getElementById(name).addEventListener("click", function() {
 
     try {
-// changeCommit will update the color of the button
+      // changeCommit will update the color of the button
       changeCommit.classList.remove("btn-success");
       changeCommit.classList.add("btn-danger");
 
@@ -32,20 +32,19 @@ function buttons(name, type, blogtopic) {
       const idcont = genrandstring(20, 'abcdefghijklmnopqrstuvwxyz');
       const idcont1 = genrandstring(20, 'abcdefghijklmnopqrstuvwxyz');
       if (type == "img") {
-        myPara.innerHTML = `<label for="${idcont}" id= "${idcont+"id"}" class="rt form-control my-3 mr-3 btn-info"><strong>--</strong>${blogtopic}</label>`  +
-          `<input class="rt form-control my-3 " type="text" id="${idcont}" name="image address" value="" placeholder="image address"><br>`+
-            `<input class="rt form-control my-3 " type="text" id="${idcont1}" name="altName" value="" placeholder="alternative name"><br>`;
+        myPara.innerHTML = `<label for="${idcont}" id= "${idcont+"id"}" class="rt form-control my-3 mr-3 btn-info"><strong>--</strong>${blogtopic}</label>` +
+          `<input class="rt form-control my-3 " type="text" id="${idcont}" name="image address" value="" placeholder="image address"><br>` +
+          `<input class="rt form-control my-3 " type="text" id="${idcont1}" name="altName" value="" placeholder="alternative name"><br>`;
 
-    } else if(type == "commit"){
-        myPara.innerHTML="";
+      } else if (type == "commit") {
+        myPara.innerHTML = "";
 
-      } else if(type == "a"){
-        myPara.innerHTML = `<label for="${idcont}" id= "${idcont+"id"}" class="rt form-control my-3 mr-3 btn-info"><strong>--</strong>${blogtopic}</label>`  +
-          `<input class="rt form-control my-3 " type="text" id="${idcont}" name="link address" value="" placeholder="link address"><br>`+
-            `<input class="rt form-control my-3 " type="text" id="${idcont1}" name="link name" value="" placeholder="link name"><br>`;
+      } else if (type == "a" || type == "script") {
+        myPara.innerHTML = `<label for="${idcont}" id= "${idcont+"id"}" class="rt form-control my-3 mr-3 btn-info"><strong>--</strong>${blogtopic}</label>` +
+          `<input class="rt form-control my-3 " type="text" id="${idcont}" name="${type=="a"?"link":"script"} address" value="" placeholder="${type=="a"?"link":"script"} address"><br>` +
+          `<input class="rt form-control my-3 " type="text" id="${idcont1}" name="${type=="a"?"link":"script"} name" value="" placeholder="${type=="a"?"link":"script"} name"><br>`;
 
-      }
-      else {
+      } else {
         myPara.innerHTML = `<label for="${idcont}" id= "${idcont+"id"}" class="rt form-control my-3 mr-3 btn-info"><strong>--</strong>${blogtopic}</label>` +
           `<textarea class="rt form-control my-3" name="Content" value="" id="${idcont}" rows="3" cols="80" placeholder="Type the text here"></textarea><br>`;
       }
@@ -89,47 +88,68 @@ function buttons(name, type, blogtopic) {
         const input2 = document.querySelector("#" + idcont1);
 
         input.addEventListener("input", function(e) {
-          list.setAttribute("src" ,e.target.value);
+          list.setAttribute("src", e.target.value);
           input2.addEventListener("input", function(m) {
-            list.setAttribute ("alt", m.target.value);
+            list.setAttribute("alt", m.target.value);
           });
           document.querySelector(".jumbotron").appendChild(list);
         });
 
-        const imgaddr =  {anchar : ""};
-        input.addEventListener("change",function(m){
-        imgaddr.anchar += m.target.value;
+        const imgaddr = {
+          anchar: ""
+        };
+        input.addEventListener("change", function(m) {
+          imgaddr.anchar = m.target.value;
         });
 
-        input2.addEventListener("change",function(e){
-        blogContent.aproperty +=  `<img src="${imgaddr.anchar}" alt="${e.target.value}">`;
-      });
+        input2.addEventListener("change", function(e) {
+          blogContent.aproperty += `<img class="imageresized" src="${imgaddr.anchar}" alt="${e.target.value}">`;
+        });
 
 
-      } else if(type=="commit"){
+      } else if (type == "commit") {
 
-      } else if (type == "a"){
+      } else if (type == "a") {
         const list = document.createElement(type);
         const input2 = document.querySelector("#" + idcont1);
 
         input2.addEventListener("input", function(e) {
           list.textContent = e.target.value;
           input.addEventListener("input", function(m) {
-            list.setAttribute ("href", m.target.value);
+            list.setAttribute("href", m.target.value);
           });
           document.querySelector(".jumbotron").appendChild(list);
         });
 
-        const linkaddr =  {anchar : ""};
-        input.addEventListener("change",function(m){
-        linkaddr.anchar += m.target.value;
+        const linkaddr = {
+          anchar: ""
+        };
+        input.addEventListener("change", function(m) {
+          linkaddr.anchar += m.target.value;
         });
 
-        input2.addEventListener("change",function(e){
-        blogContent.aproperty +=  `<a href="${linkaddr.anchar}"> ${e.target.value}</a>`;
-      });
+        input2.addEventListener("change", function(e) {
+          blogContent.aproperty += ` <a class="link bold" href="${linkaddr.anchar}"> ${e.target.value}</a>`;
+        });
 
-       }  else {
+      } else if (type == "script") {
+        const list = document.createElement(type);
+        const input2 = document.querySelector("#" + idcont1);
+
+          input.addEventListener("input", function(m) {
+            list.setAttribute("src", m.target.value);
+          });
+          document.querySelector(".jumbotron").appendChild(list);
+
+        const linkaddr = {
+          anchar: ""
+        };
+        input.addEventListener("change", function(m) {
+          linkaddr.anchar += m.target.value;
+        });
+
+        blogContent.aproperty += `<script  src="${linkaddr.anchar}" charset="utf-8"></script>`;
+      } else {
         const paragraph = document.createElement(type);
         input.addEventListener("input", function(e) {
           paragraph.textContent = e.target.value;
@@ -152,10 +172,10 @@ function buttons(name, type, blogtopic) {
       bloglist.appendChild(submit);
       // when the submit button is clicked it will check if the blog has been commited before posting it else it
       //prevent the submission of the form and requires you to commit first
-      document.querySelector(".submit").addEventListener("click",function(event){
+      document.querySelector(".submit").addEventListener("click", function(event) {
         const former = document.querySelector("#pre").classList.contains("btn-danger");
         const latter = document.querySelector("#pre").classList.contains("btn-success");
-        if (former){
+        if (former) {
           event.preventDefault();
           alert("Please click the red button to send all changes");
         }
@@ -166,7 +186,8 @@ function buttons(name, type, blogtopic) {
 }
 
 buttons("ap", "p", "Paragraph");
-buttons("as", "h3", "Subheading");
+buttons("hr", "hr", "Horizontal row");
+buttons("abr", "abbr", "Abbreviation");
 buttons("sp", "span", "Span");
 buttons("a", "a", "Links");
 buttons("ai", "i", "Italics");
@@ -174,6 +195,7 @@ buttons("ae", "em", "Emphasis");
 buttons("ab", "strong", "Strong");
 buttons("al", "li", "list");
 buttons("bq", "blockquote", "Blockquote");
+buttons("sr", "script", "script");
 buttons("im", "img", "remove image");
 buttons("pre", "commit", "commit");
 
@@ -182,7 +204,7 @@ buttons("pre", "commit", "commit");
 //This changes the value of the commit button to either btn-success when clicked
 //or remain unchanged as btn-primary
 const changeCommit = document.querySelector("#pre");
-changeCommit.addEventListener("click",function(){
+changeCommit.addEventListener("click", function() {
   changeCommit.classList.remove("btn-danger");
   changeCommit.classList.add("btn-success");
 });

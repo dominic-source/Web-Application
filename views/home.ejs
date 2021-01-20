@@ -1,4 +1,4 @@
-<%- include("partials/header") -%>
+<%- include("partials/header"); -%>
 
 
 <!-- Introduction -->
@@ -8,7 +8,7 @@
     <h1 class='sup'>Move your business higher with our developmental tools.
       <a href="/register" class="btn btn-outline-dark">Start here</a>
     </h1>
-    <p style="margin-bottom:0;">Dometech starts your dream of having a website
+    <p style="margin-bottom:0;">hubtek starts your dream of having a website
       that can serve up to your customers expectation. We are on the lookout not just
       to build the website for your business but to also provide good security measures for your potential customers.
     </p>
@@ -223,14 +223,14 @@
   <ul class="list-unstyled res">
     <% blogPost.forEach(function(item) {  %>
 
-    <li class="media my-4">
+    <li class="media my-4" style="background-color:aliceblue;">
       <img src="<%- item.imageurl %>" class="mr-2 newsimage" alt="...">
-      <div class="media-body mr-2">
+      <div class="media-body mr-2" >
         <h5 class="mt-0 mb-1 fonter"><%- item.title%></h5>
-        <div class="OR"> <%- item.content.substr(0,100)%>&nbsp;...
+        <div class="OR"> <%- item.content.substr(0,30)%>&nbsp;...
           <!-- <div class=""> -->
             <a href="/myBlog/#<%= item._id %>" class="disp">VIEW DETAILS <span>></span></a>
-            <small> <%=item.time%>:<%= item.authorName %> </small>
+            <small> <%=item.time%> : <%= item.authorName %> </small>
           <!-- </div> -->
         </div>
       </div>
@@ -247,4 +247,4 @@
 </section>
 
 
-<%- include("partials/footer") -%>
+<%- include("partials/footer"); -%>

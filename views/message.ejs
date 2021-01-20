@@ -1,4 +1,4 @@
-<%- include ("partials/header") -%>
+<%- include ("partials/header") %>
 <div class="jumbotron">
   <div class="blog-post">
     <h2 class="blog-post-title"><%- blogPost.title %></h2>
@@ -6,7 +6,7 @@
     <div class="domparser">
       <p><%- blogPost.content %></p>
     </div>
-    <a href="/myBlog/#<%= blogPost._id%>">go back</a>
+    <a href="/myBlog/#<%= blogPost._id%>" class="link bold"><i class="fa fa-arrow-left" aria-hidden="true" ></i>&nbsp;go back</a>
     <small class="text-danger" style="display:block;">
       If this was helpful, you can support the developer by donating.
       <a href="/products" class="btn btn-danger ml-sm-3 ml-3 btn-sm" name="button">Donate<a>&nbsp;<small>OR</small>&nbsp;
@@ -14,6 +14,7 @@
     </small>
   </div>
 </div>
+
 <!-- Java script code link for bootstrap-->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

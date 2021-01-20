@@ -1,33 +1,71 @@
-.memberid {
-  background-color:#5ca4ca;
-  font-family: 'Space Mono', monospace;
-  color:#f4f4f4;
-}
-
-.memberid h5{
-  font-size:20px;
+.visit {
+  background-color: white;
+  border: 1px green dashed;
+  border-radius: 10px;
   line-height: 2;
 }
 
-.check {
-  border-radius:100%;
-  border:7px solid #2b2e4a;
-  box-shadow: 1px 1px 8px 2px #74d2ff;
-  width:100px;
-  height:100px;
-  text-align:center;
-  background-color: #74d2ff;
-  margin:20px;
+.profileNext {
+  font-family: 'Montserrat', sans-serif;
+  max-width: 95%;
+  font-size: 11px;
+  line-height: 2;
 }
-.check>h5{
-  font-size:12px;
+.colo{
+  color:#252a34;
+  font-weight:600;
 }
-.sign{
-  margin-top:17px;
-  margin-bottom:25px;
-}
-.display{
-  display:flex;
-  padding-bottom:40px
 
+.cl1 {
+  color: #6a2c70;
+  font-weight: 900;
+}
+
+.cl2 {
+  color: #b83b5e;
+  font-weight: 900;
+}
+
+.cl3 {
+  color: green;
+  font-weight: 900;
+}
+
+.cl3serious {
+  color: green;
+}
+
+.cl1serious {
+  color: #6a2c70;
+  font-weight: 600;
+}
+.cl2serious{
+  color: #6a2c70;
+  font-weight: 600;
+line-height: 2;
+}
+.cl4 {
+  color: red;
+  font-weight: 900;
+}
+
+.cl5 {
+  color: #f08a5d;
+  font-weight: 900;
+}
+
+@media (max-width:499px) {
+  .cl1serious {
+    font-size: 11px;
+  }
+
+  .cl3serious {
+    font-size: 15px;
+  }
+  .cl2serious{
+    font-size: 11px;
+  }
+  .profileNext {
+    font-size: 10px;
+  }
 }

@@ -1,5 +1,11 @@
-.container {
-  max-width: 960px;
+.toValidate{
+  font-size: 11px;
+  padding-bottom: 3px;
+  font-family:"Montserrat", sans-serif;
 }
-
-.lh-condensed { line-height: 1.25; }
+.invis{
+  display:none;
+}
+.vis{
+  display:inherit;
+}

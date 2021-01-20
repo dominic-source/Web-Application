@@ -1,11 +1,13 @@
 <%- include("partials/dashboardheader") -%>
+<div class="me">
 
+</div>
 <div class="">
-  <div class="jumbotron">
-    <table>
+  <div class="jumbotron adjust">
+    <table class="">
 
       <thead>
-        <tr>
+        <tr class="">
           <th class="mx-3 spacing">
             Blog title
           </th>
@@ -15,9 +17,14 @@
           <th class="mx-3 spacing">
             Views
           </th>
+          <th class="mx-3 spacing">
+            Remove
+          </th>
         </tr>
+
       <%  report.forEach(function(item){ %>
-        <tr>
+  <form action="/del_b" method="post" class="">
+        <tr class="sidecol">
           <td class="mx-3 spacing">
             <%= item.title %>
           </td>
@@ -27,12 +34,26 @@
           <td class="mx-3 spacing">
           <%=  item.views %>
           </td>
+          <td class="mx-3 spacing">
+            <button type="button" name="deleted" class="badge form-control adjform">❌</button>
+            <div class="areYouSureColor">
+              <p class="dash">Are you sure?</p>
+                <button type="button" name="" onClick="this.form.submit()" class="btn btn-sm btn-outline-warning" >Yes</button>&nbsp; &nbsp;
+                <input type="hidden" name="delete" value="<%= item._id %>" class="yesRemove" />
+                <button type="button" name="No" class="btn btn-sm btn-outline-success no">NO</button>
+            </div>
+          </td>
         </tr>
-    <%    }); %>
+  </form>
+
+    <% }); %>
 
       </thead>
     </table>
+
   </div>
 </div>
+
+
 
 <%- include("partials/dashboardfooter") -%>

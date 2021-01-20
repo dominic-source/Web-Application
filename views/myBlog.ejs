@@ -46,7 +46,12 @@
           <strong class="d-inline-block mb-2 text-primary"><%- item.typeofBlog %></strong>
           <h3 class="mb-0"><%- item.title %></h3>
           <div class="mb-1 text-muted"><%- item.time %></div>
-          <p class="card-text mb-auto"><%- item.content.substr(0,100) %></p>
+          <div class="">
+            <p class="card-text mb-auto">
+                <%- item.content.substr(0,50) %>
+              ...</p>
+          </div>
+
           <a href="/myBlog/message/<%- item._id %>" class="stretched-link">Continue reading</a>
         </div>
 
@@ -62,18 +67,18 @@
   <div class="row">
     <div class="col-md-8 blog-main">
       <h3 class="pb-4 mb-4 font-italic border-bottom">
-        From the Dometech
+        From the hubtek
       </h3>
       <% blogPost.forEach(function(item){%>
       <div class="blog-post">
         <h2 class="blog-post-title" id=<%= item._id %>><%- item.title %></h2>
         <p class="blog-post-meta"><%- item.time %>&nbsp; by &nbsp;<%- item.authorName %></p>
-        <div class="domparser">
-          <p>
-            <%- item.content.substr(0,500) %>
-            <small><a href="/myBlog/message/<%= item._id %>">Read more...</a></small>
-            <small> views <%= item.views %> </small>
-          </p>
+        <div class="domparser" >
+          <div>
+            <%- item.content.substr(0,200) %>
+            <small><a href="/myBlog/message/<%= item._id %>" class="link bold"> Read more...</a></small>
+            <small> <%= item.views %> views  &nbsp;<i class="fa fa-eye" aria-hidden="true"></i></small>
+          </div>
         </div>
 
         <small class="text-danger" style="display:block;">

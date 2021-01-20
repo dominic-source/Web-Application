@@ -25,8 +25,9 @@
     <div class="col-lg-5 col-md-8 col-sm-8 mt-3">
       <form class="form-signin shadow" method="post" action="/login">
         <h1 class="text-center text-dark">Login</h1>
-        <input type="text" class="form-control mb-3" name=" username" placeholder="Username" required autofocus>
-        <input type="password" class="form-control mb-3" name=" password" placeholder="Password" required>
+        <p class="toValidate text-info"><%= words %></p>
+        <input type="text" class="form-control mb-3" name="username" placeholder="Username" required autofocus>
+        <input type="password" class="form-control mb-3" name="password" placeholder="Password" required>
         <input type="submit" class="form-control btn-outline-success mb-3" value="submit" name="submit">
       </form>
     </div>

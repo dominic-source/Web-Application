@@ -1,34 +1,34 @@
 <%- include ("partials/header") -%>
 <div class="jumbotron">
-  <% if (noItem) { %>
-    <h1><%= noItem %></h1>
-    <a href="/myBlog"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp; go back</a>
+  <% if (rendernoItem === true) { %>
+  <h1><%= noItem %></h1>
+  <a href="/myBlog"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp; go back</a>
 
   <% } else{ %>
-    <% blogPost.forEach(function(item){%>
-    <div class="blog-post">
-      <h2 class="blog-post-title" id=<%= item._id %>><%- item.title %></h2>
-      <p class="blog-post-meta"><%- item.time %>&nbsp; by &nbsp;<%- item.authorName %></p>
-      <div class="domparser">
-        <p>
-          <%- item.content.substr(0,500) %>
-          <small><a href="/myBlog/message/<%= item._id %>">Read more...</a></small>
-          <small> views <%= item.views %> </small>
-        </p>
-      </div>
-
-      <small class="text-danger" style="display:block;">
-        If this was helpful, you can support the developer by donating.
-        <a href="/products" class="btn btn-danger ml-sm-3 ml-3 btn-sm" name="button">Donate<a>&nbsp;<small>OR</small>&nbsp;
-            <a href="/register" class="btn btn-outline-dark mr-sm-3 mr-3 btn-sm">Hire me</a>
-      </small>
+  <% blogPost.forEach(function(item){%>
+  <div class="blog-post">
+    <h2 class="blog-post-title" id=<%= item._id %>><%- item.title %></h2>
+    <p class="blog-post-meta"><%- item.time %>&nbsp; by &nbsp;<%- item.authorName %></p>
+    <div class="domparser">
+      <p>
+        <%- item.content.substr(0,500) %>
+        <small><a href="/myBlog/message/<%= item._id %>">Read more...</a></small>
+        <small><%= item.views %> views &nbsp;<i class="fa fa-eye" aria-hidden="true"></i> </small>
+      </p>
     </div>
+    <a href="/myBlog/#<%= blogPost._id%>" class="link bold"><i class="fa fa-arrow-left" aria-hidden="true" ></i>&nbsp;go back</a>
+    <small class="text-danger" style="display:block;">
+      If this was helpful, you can support the developer by donating.
+      <a href="/products" class="btn btn-danger ml-sm-3 ml-3 btn-sm" name="button">Donate<a>&nbsp;<small>OR</small>&nbsp;
+          <a href="/register" class="btn btn-outline-dark mr-sm-3 mr-3 btn-sm">Hire me</a>
+    </small>
+  </div>
 
 
-    <hr style="background-color:#e9ecef;">
-    <!-- /.blog-post -->
-    <% }); %>
-<%  } %>
+  <hr style="background-color:#e9ecef;">
+  <!-- /.blog-post -->
+  <% }); %>
+  <%  } %>
 
 </div>
 <!-- Java script code link for bootstrap-->

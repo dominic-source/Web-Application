@@ -1,5 +1,5 @@
 //jshint esversion:6
-
+(function(){
 document.querySelector(".plus").addEventListener("click", function() {
 const good = document.querySelector(".hidden");
 const newElement = document.createElement("div");
@@ -26,3 +26,4 @@ function genrandstring(len, combination) {
   }
   return ans;
 }
+}());

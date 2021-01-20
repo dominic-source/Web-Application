@@ -140,16 +140,28 @@ h1, h2, h3, h4, h5, h6 {
   width:70%;
 }
 .domparser {
-  border: 3px #2b2e4a solid;
+  padding-left:5px;
+  padding-top: 10px;
+  border: 3px green solid;
   border-top: 0.9px;
   border-bottom: 0.9px;
   border-right: 0.9px;
   color: #515070;
-  background-color:#f4f4f4;
-  margin: 15px;
+  background-color:#ecf4f3;
+  margin: 1px;
   font-family: 'Montserrat', sans-serif;
+  border-radius:5px;
+  box-shadow: 0.1px 0.1px 3px lightgreen;
 }
-.domparser p{
+.domparser div{
   padding-left:10px;
+  padding-top:10px;
   line-height:2;
 }
+ .domparser h3{
+   font-size:20px;
+   /* padding-left: 10px; */
+ }
+ .domparser small{
+   display:inline;
+ }

@@ -1,31 +1,193 @@
-<%- include("partials/header") -%>
+<%- include("partials/header") %>
 <link rel="stylesheet" href="/css/member.css">
+<link rel="stylesheet" href="/css/dashstyles.css">
+
 <div class="jumbotron mb-0" style="font-family: 'Montserrat', sans-serif;">
   <div class="container">
-    <h1 class="display-3 fd">Welcome <%= customer.nameOfCustomer%>!</h1>
-    <a href="/images/beauty.jpg" class="btn btn-sm btn-success" download>Download your project</a>
+    <div class="my-3">
+      <a href="/logout" class="btn btn-sm btn-success mx-2">logout </a>
+      |<a href="/member/#myProfile" class="link mx-2 bold" style="color:blue;">Profile</a>
+      |<a href="/member/#addTransaction" class="link mx-2 bold" style="color:red;">Create Transaction</a>
+      |<a href="/member/#viewTransaction" class="link mx-2 bold" style="color:purple;">View Transaction</a>
+    </div>
+
+
+    <div class="row">
+      <div class="col-lg-5 col-md-8 col-sm-10 mb-3 py-3 mr-3 visit" id="myProfile">
+        <div class="">
+          <div class="">
+            <h5 class="mb-3">
+              <span class="cl1">P</span>
+              <span class="cl2">r</span>
+              <span class="cl3">o</span>
+              <span class="cl4">f</span>
+              <span class="cl5">i</span>
+              <span class="cl1">l</span>
+              <span class="cl2">e</span>
+            </h5>
+          </div>
+          <div class="my-3">
+            <h6 class="profileNext py-1"><span class="cl1"><i class="fa fa-user-o" aria-hidden="true"></i>
+
+                Username:
+
+                <span class="colo"><%= member.username %></span>
+
+              </span></h6>
+            <h6 class="profileNext py-1"><span class="cl4"><i class="fa fa-openid" aria-hidden="true"></i>
+
+                userID:
+
+                <span class="colo"><%= member.id %></span>
+
+              </span></h6>
+            <h6 class="profileNext py-1"><span class="cl5"><i class="fa fa-inbox" aria-hidden="true"></i>
+
+                Email Address:
+
+                <span class="colo"><%= member.email %> </span>
+
+              </span> </h6>
+            <h6 class="profileNext py-1"><span class="cl2"><i class="fa fa-industry" aria-hidden="true"></i>
+
+                Company/Organisation:
+
+                <span class="colo"><%= member.organisation %> </span>
+
+              </span> </h6>
+            <h6 class="profileNext py-1"><span class="cl3"><i class="fa fa-buysellads" aria-hidden="true"></i>
+
+                Number of Transactions:
+
+                <span class="colo"> <%= member.member.length %></span>
+
+              </span> </h6>
+            <h6 class="profileNext py-1"><span class="cl4"><i class="fa fa-paypal" aria-hidden="true"></i>
+
+                Number of Payments:
+
+                <span class="colo"></span>
+
+              </span> </h6>
+            <div class="profileNext py-1">
+              <div class="cl3">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                List of all Transactions:
+              </div>
+              <ul>
+                <% member.member.forEach(function(item){ %>
+                <li class="colo">
+                  <%= item.projectName %>
+                </li>
+                <%  }); %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 col-md-8 col-sm-10 mb-3 py-3 visit" id="addTransaction">
+        <div class="">
+          <h5 class="ubuntu cl3serious"><i class="fa fa-buysellads" aria-hidden="true"></i> Create Transaction</h5>
+          <form class="" action="/transaction/create" method="post">
+
+            <div class="cl1serious">
+              <label for="myProject"><i class="fa fa-lastfm-square" aria-hidden="true"></i> Project name:</label>
+              <input type="text" id="myProject" name="projectName" value="" class="form-control mb-3" placeholder="Name of project" required>
+            </div>
+
+            <div class="cl1serious">
+              <label for="cc-currency"><i class="fa fa-money" aria-hidden="true"></i> Currency:</label>
+              <select class="form-control custom-select d-block mb-3 adpaypol2" id="cc-currency" name="currency">
+                <option value="NGN">NGN</option>
+                <option value="USD">USD</option>
+              </select>
+            </div>
+
+            <div class="cl1serious">
+              <label for="amount"><i class="fa fa-sort-amount-asc" aria-hidden="true"></i> How much are you willing to pay (Budget)?</label>
+              <input class="form-control mb-3 adpaypol2" type="text" name="amount" value="" id="amount" placeholder="Amount">
+            </div>
+
+            <div class="cl1serious">
+              <label for="details"><i class="fa fa-glass" aria-hidden="true"></i> Description in details of the project:</label>
+              <textarea name="description" rows="12" cols="80" class="form-control mb-3" id="details"></textarea>
+            </div>
+            <button type="submit" name="button" class="btn btn-primary">Create Transaction</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-lg-5 col-md-8 col-sm-10 mb-3 py-3 visit" id="viewTransaction">
+        <div>
+          <label for="transaction">
+            <h5 class="ubuntu cl3serious"><i class="fa fa-hand-o-down" aria-hidden="true"> </i> Select transaction to view</h5>
+          </label>
+          <select class="form-control custom-select d-block mb-3" name="member" id="transaction">
+            <option value="">None</option>
+            <% member.member.forEach(function(item){ %>
+            <option value="<%= item.projectName %>">
+              <%= item.projectName %>
+            </option>
+            <%  }); %>
+          </select>
+        </div>
+        <% member.member.forEach(function(item){ %>
+        <div class="inn invis <%= item.projectName %>" id="<%= item.projectName %>">
+
+          <h6 class="cl2serious">Project name:
+
+            <span class="colo"><%= item.projectName %></span>
+
+          </h6>
+          <h6 class="cl2serious">Transaction ID:
+
+            <span class="colo"><%= item.transactionId %></span>
+
+          </h6>
+          <h6 class="cl2serious">Budget:
+
+            <span class="colo"> <%= item.budget %></span>
+
+          </h6>
+          <h6 class="cl2serious">Project description:
+
+            <span class="colo"> <%= item.projectDescription %></span>
+
+          </h6>
+          <h6 class="cl2serious">Payment:
+
+            <span class="colo payment"> <%= item.payment %> </span>
+
+          </h6>
+          <h6 class="cl2serious">Date of Transaction:
+
+            <span class="colo"> <%= item.dateOfTransaction %></span>
+
+          </h6>
+          <h6 class="cl2serious">Time duration:
+
+            <span class="colo"> <%= item.timeDuration %></span>
+
+          </h6>
+          <h6 class="cl2serious">Delivered:
+
+            <span class="colo"> <%= item.delivered %></span>
+
+          </h6>
+          <h6 class="cl2serious">Delivery date:
+
+            <span class="colo"> <%= item.dateDelivered %></span>
+
+          </h6>
+          Download your project <a href="/css/blog.css" class="btn btn-sm btn-outline-success"> here</a>
+
+        </div>
+        <%  }); %>
+      </div>
+      <script src="/js/member.js" charset="utf-8"></script>
+    </div>
   </div>
 </div>
-<div class="memberid">
-  <div class="ml-5 mx-5 pt-5">
-    <h5>Username:<%= customer.nameOfCustomer %></h5>
-    <h5>Transaction_id:<%= customer.transactionId %></h5>
-    <h5>Project name:<%= customer.websiteType %></h5>
-    <h5>Date of request:<%= customer.time %></h5>
-    <h5>Delivered:<%= customer.delivered %></h5>
-  </div>
-  <div class="display">
-    <div class="check">
-      <h1 class="sign">❌</h1>
-      <h5>Not delivered</h5>
-    </div>
-    <div class="check">
-      <h1 class="sign">✔</h1>
-      <h5>Delivered</h5>
-
-    </div>
-  </div>
-  <a href="/logout" class="btn btn-sm btn-danger">logout</a>
-
 </div>
+
 <%- include("partials/footer") -%>

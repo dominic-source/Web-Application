@@ -4,7 +4,8 @@
   <div class="">
     <h2 class="my-3 dash">Compose message</h2>
     <span class="btn btn-sm btn-primary mr-3 mb-3" id="ap"><strong>+</strong> Add Paragraph</span>
-    <span class="btn btn-sm btn-primary mr-3 mb-3" id="as"><strong>+</strong> Add Subheading</span>
+    <span class="btn btn-sm btn-primary mr-3 mb-3" id="hr"><strong>+</strong> Add Horizontal row</span>
+    <span class="btn btn-sm btn-primary mr-3 mb-3" id="abr"><strong>+</strong> Add Abbreviation</span>
     <span class="btn btn-sm btn-primary mr-3 mb-3" id="sp"><strong>+</strong> Add Span</span>
     <span class="btn btn-sm btn-primary mr-3 mb-3" id="a"><strong>+</strong> Add link</span>
     <span class="btn btn-sm btn-primary mr-3 mb-3" id="ai"><strong>+</strong> Add Italics</span>
@@ -13,6 +14,7 @@
     <span class="btn btn-sm btn-primary mr-3 mb-3" id="al"><strong>+</strong> Add List</span>
     <span class="btn btn-sm btn-primary mr-3 mb-3" id="im"><strong>+</strong> Add Image</span>
     <span class="btn btn-sm btn-primary mr-3 mb-3" id="bq"><strong>+</strong> Add blockquote</span>
+    <span class="btn btn-sm btn-primary mr-3 mb-3" id="sr"><strong>+</strong> Add Script</span>
     <span class="btn btn-sm btn-danger mr-3 mb-3" id="pre">Commit</span>
   </div>
 
@@ -20,7 +22,7 @@
     <ul class="list-unstyled" id="bloglist">
       <li>
         <label for="author" class="form-control my-3 mr-3 btn-info btn-sm">Author's name</label>
-        <input class="form-control my-3" type="text" name="author btn-sm" value="" id="author" placeholder="Author's name" required<br>
+        <input class="form-control my-3" type="text" name="author" value="" id="author" placeholder="Author's name" required<br>
         <label for="title" class="form-control my-3 mr-3 btn-info btn-sm">Title of post</label>
         <input class="form-control my-3" type="text" name="title" value="" id="title" placeholder="Title" required><br>
         <label for="typeofBlog" class="form-control my-3 mr-3 btn-info btn-sm">Type of post</label>
