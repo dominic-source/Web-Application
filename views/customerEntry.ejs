@@ -58,6 +58,7 @@
 
       <tbody>
         <% customer.forEach(function(item,index){ %>
+        <% if(item.member !== undefined){ %>
         <%  if(item.member.length === 0) {%>
         <form action="/del_c" method="post">
           <tr class="sidecol">
@@ -111,12 +112,13 @@
               <div class="areYouSureColor">
                 <p class="dash">Are you sure?</p>
                 <button type="button" name="" onClick="this.form.submit()" class="btn btn-sm btn-outline-warning">Yes</button>&nbsp; &nbsp;
-                <input type="hidden" name="delete" value="<%= item._id %>" class="yesRemove" />
+                <input type="hidden" name="delete1" value="<%= item._id %>" class="yesRemove" />
                 <button type="button" name="No" class="btn btn-sm btn-outline-success no">NO</button>
               </div>
             </td>
           </tr>
         </form>
+
         <%    } else  { %>
         <% item.member.forEach(function(member){ %>
 
@@ -148,9 +150,9 @@
             </td>
             <td class="mx-3 spacing">
               <%= member.projectDescription.substr(0,20) %>...
-              <button type="button" name="button" class="btn btn-sm btn-outline-info setProject" id="<%=  member.transactionId %>">view</button>
+              <button type="button" name="button" class="btn btn-sm btn-outline-info setProject">view</button>
               <div class="jumbotron invis try">
-                <i class="fa fa-times-circle fa-3x unView" aria-hidden="true" style="color:red;"></i>
+                <i class="fa fa-times-circle fa-3x unView mb-3" aria-hidden="true" style="color:red;"></i>
                 <h5 class="text-mute">Details of project</h5>
                 <%= member.projectDescription %>
               </div>
@@ -178,8 +180,10 @@
               <button type="button" name="deleted" class="badge form-control adjform">❌</button>
               <div class="areYouSureColor">
                 <p class="dash">Are you sure?</p>
-                <button type="button" name="" onClick="this.form.submit()" class="btn btn-sm btn-outline-warning">Yes</button>&nbsp; &nbsp;
-                <input type="hidden" name="delete" value="<%= item._id %>" class="yesRemove" />
+                <button type="submit" name="" onClick="this.form.submit()" class="btn btn-sm btn-outline-warning">Yes</button>&nbsp; &nbsp;
+                <input type="hidden" name="delete2" value="<%= member._id %>" class="yesRemove" />
+                <input type="hidden" name="delete3" value="<%= item._id %>" class="yesRemove" />
+
                 <button type="button" name="No" class="btn btn-sm btn-outline-success no">NO</button>
               </div>
             </td>
@@ -188,6 +192,7 @@
         <%  }); %>
 
         <% }%>
+        <%  } %>
         <%  }); %>
 
       </tbody>

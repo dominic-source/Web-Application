@@ -23,8 +23,7 @@
 <div class="container">
   <header class="blog-header py-3">
     <div class="row flex-nowrap justify-content-between align-items-center">
-      <a href="/products" class="btn btn-dark ml-sm-3 ml-3 btn-sm" name="button">Donate<a>
-          <a href="/register" class="btn btn-outline-dark mr-sm-3 mr-3 btn-sm">Hire me</a>
+      <a href="/register" class="btn btn-outline-dark mr-sm-3 mr-3 btn-sm">Hire me</a>
     </div>
   </header>
   <% blogPost.forEach(function(item,index){ %>
@@ -48,7 +47,7 @@
           <div class="mb-1 text-muted"><%- item.time %></div>
           <div class="">
             <p class="card-text mb-auto">
-                <%- item.content.substr(0,50) %>
+              <%- item.content.substr(0,50) %>
               ...</p>
           </div>
 
@@ -73,19 +72,13 @@
       <div class="blog-post">
         <h2 class="blog-post-title" id=<%= item._id %>><%- item.title %></h2>
         <p class="blog-post-meta"><%- item.time %>&nbsp; by &nbsp;<%- item.authorName %></p>
-        <div class="domparser" >
+        <div class="domparser">
           <div>
             <%- item.content.substr(0,200) %>
             <small><a href="/myBlog/message/<%= item._id %>" class="link bold"> Read more...</a></small>
-            <small> <%= item.views %> views  &nbsp;<i class="fa fa-eye" aria-hidden="true"></i></small>
+            <small> <%= item.views %> views &nbsp;<i class="fa fa-eye" aria-hidden="true"></i></small>
           </div>
         </div>
-
-        <small class="text-danger" style="display:block;">
-          If this was helpful, you can support the developer by donating.
-          <a href="/products" class="btn btn-danger ml-sm-3 ml-3 btn-sm" name="button">Donate<a>&nbsp;<small>OR</small>&nbsp;
-              <a href="/register" class="btn btn-outline-dark mr-sm-3 mr-3 btn-sm">Hire me</a>
-        </small>
       </div>
 
 
@@ -124,7 +117,7 @@
 </main><!-- /.container -->
 
 <footer class="blog-footer">
-  <p>  <a href="#"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;Back to top</a>   &nbsp</p>
+  <p> <a href="#"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;Back to top</a> &nbsp</p>
 
 </footer>
 

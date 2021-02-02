@@ -17,6 +17,8 @@ const {
 const app = express();
 const https = require("https");
 const random = require(__dirname + "/random.js");
+const bcrypt = require("bcrypt");
+const saltRounds = 7;
 //security for headers
 // const helmet = require("helmet");
 // app.use(helmet());
@@ -24,10 +26,10 @@ const random = require(__dirname + "/random.js");
 
 //End of security headers
 
-
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+app.use(bodyParser.json());
 
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
@@ -43,19 +45,24 @@ app.use(passport.initialize());
 app.use(passport.session());
 /**********************end initialize passport and session ******************/
 
-mongoose.connect("mongodb://localhost:27017/affiliateDB", {
+//Make a MongoDB connection
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true
 });
 
+/********************************************* create storage engine **************************/
 // mongoose.connect("mongodb+srv://chinonsoAffiliate:Donchin1#@cluster0.9xrdv.mongodb.net/affiliateDB?retryWrites=true&w=majority",{
 //   useNewUrlParser: true
 // });
-mongoose.set("useCreateIndex", true);
-
-
 
 //Schema area
+const messageSchema = new mongoose.Schema({
+  message: String,
+  time: String,
+});
 
 const blogSchema = new mongoose.Schema({
   authorName: String,
@@ -67,7 +74,8 @@ const blogSchema = new mongoose.Schema({
   views: {
     type: Number,
     default: 0
-  }
+  },
+  message: [messageSchema]
 });
 
 const paymentSchema = new mongoose.Schema({
@@ -98,7 +106,7 @@ const memberSchema = new mongoose.Schema({
   dateOfTransaction: String,
   timeDuration: String,
   delivered: String,
-  dateDelivered: String
+  dateDelivered: String,
 });
 
 const userSchema = new mongoose.Schema({
@@ -109,14 +117,12 @@ const userSchema = new mongoose.Schema({
   first_name: String,
   organisation_name: String,
   googleId: String,
-  member: [memberSchema],
   active: Boolean,
-  secret: String
+  secret: String,
+  passcode: String
 });
 
 //End of schema area
-
-
 /************* Schema plugin ***********************************/
 //user Schema
 userSchema.plugin(passportLocalMongoose);
@@ -131,6 +137,7 @@ const Member = new mongoose.model("Member", memberSchema);
 const Integration = new mongoose.model("Integration", integrationSchema);
 const Blog = new mongoose.model("Blog", blogSchema);
 const Payment = new mongoose.model("Payment", paymentSchema);
+const Message = new mongoose.model("Message", messageSchema);
 /*************End of models*********************/
 
 
@@ -324,6 +331,88 @@ app.post("/register", function(req, res) {
   });
 });
 
+app.post("/registerAdmin", function(req, res) {
+  let password = req.body.password;
+  let password2 = req.body.password2;
+  let username = req.body.username;
+  let email = req.body.email;
+  let passcode = req.body.passcode;
+  let passcoded = bcrypt.hash(passcode, saltRounds, function(err, hash) {
+    if (!err) {
+      return hash;
+    }
+  });
+  User.findOne({
+    username: username
+  }, function(err, found) {
+    if (found) {
+      Blog.find({}, function(err, foundItem) {
+        if (!err) {
+          User.findOne({
+            email: email
+          }, function(err, found) {
+            if (found) {
+              res.render("RegisterAdmin", {
+                blogPost: foundItem,
+                words: "username already in use. Suggested username: " + username + random.random(),
+                email: "Email already taken by another user."
+              });
+            } else {
+              res.render("RegisterAdmin", {
+                blogPost: foundItem,
+                words: "username already in use. Suggested username: " + username + random.random(),
+                email: null
+              });
+            }
+          });
+        }
+      });
+    } else if (!found) {
+      Blog.find({}, function(err, foundItem) {
+        if (!err) {
+          User.findOne({
+            email: email
+          }, function(err, found) {
+            if (found) {
+              res.render("RegisterAdmin", {
+                blogPost: foundItem,
+                words: null,
+                email: "Email already taken by another user."
+              });
+            }
+          });
+        }
+      });
+      if (password === password2) {
+        User.register({
+            username: username,
+            email: email,
+            last_name: req.body.surname,
+            first_name: req.body.name,
+            organisation_name: req.body.organisation,
+            passcode: passcoded
+          }, req.body.password,
+          function(err, user) {
+            if (!err) {
+              passport.authenticate("local", {
+                failureRedirect: "/errorRegister"
+              })(req, res, function() {
+                res.redirect("/admin");
+              });
+
+            } else {
+              res.redirect("/errorRegister");
+            }
+          });
+      } else {
+        res.redirect("/errorRegister");
+      }
+    } else {
+      console.log(err);
+      res.redirect("/errorRegister");
+    }
+  });
+});
 
 app.get("/errorRegister", function(req, res) {
   res.render("errorRegister");
@@ -348,7 +437,66 @@ app.post("/login", function(req, res) {
     }
   });
 });
+app.get("/registerAdmin",function(req,res){
+  Blog.find({}, function(err, foundItem) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("RegisterAdmin", {
+        blogPost: foundItem,
+        words: null,
+        email: null
+      });
+    }
+  });
+});
+app.get('/admin',function(req,res){
+  Blog.find({}, function(err, foundItem) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("admin", {
+        blogPost: foundItem,
+        words: null
+      });
+    }
+  });
+});
 
+app.post("/admin", function(req, res) {
+  User.findOne({
+    username: req.body.username
+  }, function(err, found) {
+    if (!found) {
+      let hash = found.passcode;
+      bcrypt.compare(req.body.passcode, hash, function(err, res) {
+        if (res === true) {
+          const user = new User({
+            username: req.body.username,
+            password: req.body.password,
+          });
+          req.login(user, function(err) {
+            if (err) {
+              console.log("There was an error");
+            } else {
+              passport.authenticate("local", {
+                failureRedirect: "/failureLogin"
+              })(req, res, function() {
+                if (!err) {
+                  res.redirect("/dashboard");
+                }
+              });
+            }
+          });
+        } else {
+          res.redirect("/errorRegister");
+        }
+      });
+    } else {
+      res.redirect("/errorRegister");
+    }
+  });
+});
 app.get("/failureLogin", function(req, res) {
   Blog.find({}, function(err, foundItem) {
     res.render("login", {
@@ -358,8 +506,6 @@ app.get("/failureLogin", function(req, res) {
   });
 });
 /******************************* End of registeration and signing in ******************************/
-
-
 
 /******************************** Beginning of business logic *****************************/
 app.post("/transaction/create", function(req, res) {
@@ -381,7 +527,9 @@ app.post("/transaction/create", function(req, res) {
       dateDelivered: "Not yet delivered"
     });
     member.save();
-    User.findOne({_id:req.user._id},function(err,foundItem){
+    User.findOne({
+      _id: req.user._id
+    }, function(err, foundItem) {
       foundItem.member.push(member);
       foundItem.save();
       res.redirect("/member");
@@ -410,18 +558,6 @@ app.get("/products", function(req, res) {
       console.log(err);
     } else {
       res.render("payment3", {
-        blogPost: foundItem
-      });
-    }
-  });
-});
-
-app.get("/Marketplace", function(req, res) {
-  Blog.find({}, function(err, foundItem) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("Marketplace", {
         blogPost: foundItem
       });
     }
@@ -490,83 +626,132 @@ app.get("/myBlog/message/:param", function(req, res) {
 
 // Admin part of dome technologies
 app.get("/dashboard", function(req, res) {
-  User.find({}, function(err, foundItem) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("customerEntry", {
-        customer: foundItem
+  if (req.isAuthenticated()) {
+    if (req.passcode === process.env.PASSCODE) {
+      User.find({}, function(err, foundItem) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render("customerEntry", {
+            customer: foundItem
+          });
+        }
       });
+    } else {
+      res.redirect("/login");
     }
-  });
+  } else {
+    res.redirect("/admin");
+  }
 });
 
 app.get("/blog", function(req, res) {
-  res.render("blog");
+  if (req.isAuthenticated()) {
+    if (req.passcode === process.env.PASSCODE) {
+      res.render("blog");
+    } else {
+      res.redirect("/login");
+    }
+  } else {
+    res.redirect("/admin");
+  }
 });
 
 app.post("/blog", function(req, res) {
-  const blog = new Blog({
-    authorName: req.body.author,
-    title: _.startCase(req.body.title),
-    content: req.body.content,
-    time: getDate.getDate(),
-    imageurl: req.body.url,
-    typeofBlog: req.body.typeofBlog
-  });
-  blog.save(function(err) {
-    if (err) {
-      console.log(err);
+  if (req.isAuthenticated()) {
+    if (req.passcode === process.env.PASSCODE) {
+      const blog = new Blog({
+        authorName: req.body.author,
+        title: _.startCase(req.body.title),
+        content: req.body.content,
+        time: getDate.getDate(),
+        imageurl: req.body.url,
+        typeofBlog: req.body.typeofBlog
+      });
+      blog.save(function(err) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Successful");
+        }
+      });
+      res.redirect("/blog");
+
     } else {
-      console.log("Successful");
+      res.redirect("/login");
     }
-  });
-  res.redirect("/blog");
+  } else {
+    res.redirect("/admin");
+  }
 });
 
 app.get("/reports", function(req, res) {
-  Blog.find({}, function(err, foundItem) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("reports", {
-        report: foundItem
+  if (req.isAuthenticated()) {
+    if (req.passcode === process.env.PASSCODE) {
+      Blog.find({}, function(err, foundItem) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render("reports", {
+            report: foundItem
+          });
+        }
       });
+    } else {
+      res.redirect("/login");
     }
-  });
+  } else {
+    res.redirect("/admin");
+  }
 });
 
 app.get("/integration", function(req, res) {
-  res.render("integration");
+  if (req.isAuthenticated()) {
+    if (req.passcode === process.env.PASSCODE) {
+      res.render("integration");
+    } else {
+      res.redirect("/login");
+    }
+  } else {
+    res.redirect("/admin");
+  }
 });
 
 app.post("/integration", function(req, res) {
-  if (typeof(req.body.apiNames) === "object") {
-    for (var i = 0; i < req.body.apiNames.length; i++) {
-      const integration = new Integration({
-        apiName: req.body.apiNames[i],
-        apiImageAddress: req.body.apiImageAddresses[i],
-        apiLinkAddress: req.body.apiAddresses[i],
-        apiCompanySupplier: req.body.apiCompanySupplier[i]
-      });
-      integration.save();
+  if (req.isAuthenticated()) {
+    if (req.passcode === process.env.PASSCODE) {
+      if (typeof(req.body.apiNames) === "object") {
+        for (var i = 0; i < req.body.apiNames.length; i++) {
+          const integration = new Integration({
+            apiName: req.body.apiNames[i],
+            apiImageAddress: req.body.apiImageAddresses[i],
+            apiLinkAddress: req.body.apiAddresses[i],
+            apiCompanySupplier: req.body.apiCompanySupplier[i]
+          });
+          integration.save();
+        }
+      } else {
+        const integration = new Integration({
+          apiName: req.body.apiNames,
+          apiImageAddress: req.body.apiImageAddresses,
+          apiLinkAddress: req.body.apiAddresses,
+          apiCompanySupplier: req.body.apiCompanySupplier
+        });
+        integration.save(function(err) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("Successful");
+          }
+        });
+      }
+      res.redirect("/integration");
+    } else {
+      res.redirect("/login");
     }
   } else {
-    const integration = new Integration({
-      apiName: req.body.apiNames,
-      apiImageAddress: req.body.apiImageAddresses,
-      apiLinkAddress: req.body.apiAddresses,
-      apiCompanySupplier: req.body.apiCompanySupplier
-    });
-    integration.save(function(err) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("Successful");
-      }
-    });
+    res.redirect("/admin");
   }
-  res.redirect("/integration");
 });
 
 /******************* Delete blog and/or delete customer ******************/
@@ -579,16 +764,39 @@ app.post("/del_b", function(req, res) {
       res.redirect("/reports");
     }
   });
-  // console.log(delBlogItem);
 });
 
 app.post("/del_c", function(req, res) {
-  let delCustomer = req.body.delete;
-  Member.findByIdAndRemove(delCustomer, function(err) {
-    if (!err) {
-      res.redirect("/dashboard");
-    }
-  });
+  let delCustomer1 = req.body.delete1;
+  let delCustomer2 = req.body.delete2;
+  let delCustomer3 = req.body.delete3;
+  if (delCustomer1 !== undefined) {
+    User.deleteOne({
+      _id: delCustomer1
+    }, function(err) {
+      if (!err) {
+        res.redirect("/dashboard");
+      }
+    });
+  } else if (delCustomer2 !== undefined) {
+    Member.findByIdAndRemove(delCustomer2, function(err, founditem) {
+      if (!err) {
+        User.findOne({
+          _id: delCustomer3
+        }, function(err, foundItem) {
+          if (!err) {
+            foundItem.member.forEach(function(item, index) {
+              if (item._id == delCustomer2) {
+                foundItem.member.splice(index, 1);
+                foundItem.save();
+                res.redirect("/dashboard");
+              }
+            });
+          }
+        });
+      }
+    });
+  }
 });
 
 /********************************* Payment point authentication *******************************/
@@ -633,7 +841,6 @@ app.post("/payment", function(reqs, resp) {
   req.write(params);
   req.end();
 });
-
 
 app.get("/verify_transaction/:reference", function(reqs, resp) {
   const options = {

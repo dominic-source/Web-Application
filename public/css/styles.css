@@ -5,6 +5,9 @@
   font-family: 'Ubuntu', sans-serif;
 }
 
+.whatsapp{
+visibility: hidden;
+}
 .nav-link:hover {
   font-weight: bold;
 }
@@ -302,6 +305,13 @@ hr {
   .res {
     margin: 20px 0px 20px 5px;
     padding-bottom: 4px;
+  }
+  .whatsapp{
+    position:fixed;
+    bottom:20%;
+    right:35%;
+    z-index:5;
+    visibility:visible;
   }
 
   .online {
