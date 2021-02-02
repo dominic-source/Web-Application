@@ -44,20 +44,13 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 /**********************end initialize passport and session ******************/
-
-//Make a MongoDB connection
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect("mongodb+srv://chinonso:Qk8EAPL1Q1UqtnFj@cluster0.uzojh.mongodb.net/Web_appDB?retryWrites=true&w=majority",{
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
   useCreateIndex: true
 });
-
 /********************************************* create storage engine **************************/
-// mongoose.connect("mongodb+srv://chinonsoAffiliate:Donchin1#@cluster0.9xrdv.mongodb.net/affiliateDB?retryWrites=true&w=majority",{
-//   useNewUrlParser: true
-// });
-
 //Schema area
 const messageSchema = new mongoose.Schema({
   message: String,

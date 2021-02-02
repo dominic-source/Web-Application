@@ -26,7 +26,9 @@
               <span class="cl2">e</span>
             </h5>
           </div>
+
           <div class="my-3">
+
             <h6 class="profileNext py-1"><span class="cl1"><i class="fa fa-user-o" aria-hidden="true"></i>
 
                 Username:
@@ -55,6 +57,8 @@
                 <span class="colo"><%= member.organisation %> </span>
 
               </span> </h6>
+              <% if(member.member !== undefined){ %>
+
             <h6 class="profileNext py-1"><span class="cl3"><i class="fa fa-buysellads" aria-hidden="true"></i>
 
                 Number of Transactions:
@@ -82,6 +86,8 @@
                 <%  }); %>
               </ul>
             </div>
+            <%  } %>
+
           </div>
         </div>
       </div>
@@ -116,12 +122,14 @@
           </form>
         </div>
       </div>
-
+      <% if(member.member !== undefined){ %>
       <div class="col-lg-5 col-md-8 col-sm-10 mb-3 py-3 visit" id="viewTransaction">
         <div>
           <label for="transaction">
             <h5 class="ubuntu cl3serious"><i class="fa fa-hand-o-down" aria-hidden="true"> </i> Select transaction to view</h5>
           </label>
+
+
           <select class="form-control custom-select d-block mb-3" name="member" id="transaction">
             <option value="">None</option>
             <% member.member.forEach(function(item){ %>
@@ -130,6 +138,7 @@
             </option>
             <%  }); %>
           </select>
+
         </div>
         <% member.member.forEach(function(item){ %>
         <div class="inn invis <%= item.projectName %>" id="<%= item.projectName %>">
@@ -184,10 +193,13 @@
         </div>
         <%  }); %>
       </div>
+      <%  } %>
+
       <script src="/js/member.js" charset="utf-8"></script>
     </div>
   </div>
 </div>
+
 </div>
 
 <%- include("partials/footer") -%>
