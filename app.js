@@ -44,7 +44,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 /**********************end initialize passport and session ******************/
-mongoose.connect("mongodb+srv://chinonso:Qk8EAPL1Q1UqtnFj@cluster0.uzojh.mongodb.net/Web_appDB?retryWrites=true&w=majority",{
+// mongoose.connect("mongodb+srv://chinonso:Qk8EAPL1Q1UqtnFj@cluster0.uzojh.mongodb.net/Web_appDB?retryWrites=true&w=majority",{
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -242,12 +243,10 @@ app.get("/member", function(req, res) {
     res.redirect("/login");
   }
 });
-
 app.get("/logout", function(req, res) {
   req.logout();
   res.redirect("/");
 });
-
 app.post("/register", function(req, res) {
   let password = req.body.password;
   let password2 = req.body.password2;
@@ -323,94 +322,9 @@ app.post("/register", function(req, res) {
     }
   });
 });
-
-app.post("/registerAdmin", function(req, res) {
-  let password = req.body.password;
-  let password2 = req.body.password2;
-  let username = req.body.username;
-  let email = req.body.email;
-  let passcode = req.body.passcode;
-  let passcoded = bcrypt.hash(passcode, saltRounds, function(err, hash) {
-    if (!err) {
-      return hash;
-    }
-  });
-  User.findOne({
-    username: username
-  }, function(err, found) {
-    if (found) {
-      Blog.find({}, function(err, foundItem) {
-        if (!err) {
-          User.findOne({
-            email: email
-          }, function(err, found) {
-            if (found) {
-              res.render("RegisterAdmin", {
-                blogPost: foundItem,
-                words: "username already in use. Suggested username: " + username + random.random(),
-                email: "Email already taken by another user."
-              });
-            } else {
-              res.render("RegisterAdmin", {
-                blogPost: foundItem,
-                words: "username already in use. Suggested username: " + username + random.random(),
-                email: null
-              });
-            }
-          });
-        }
-      });
-    } else if (!found) {
-      Blog.find({}, function(err, foundItem) {
-        if (!err) {
-          User.findOne({
-            email: email
-          }, function(err, found) {
-            if (found) {
-              res.render("RegisterAdmin", {
-                blogPost: foundItem,
-                words: null,
-                email: "Email already taken by another user."
-              });
-            }
-          });
-        }
-      });
-      if (password === password2) {
-        User.register({
-            username: username,
-            email: email,
-            last_name: req.body.surname,
-            first_name: req.body.name,
-            organisation_name: req.body.organisation,
-            passcode: passcoded
-          }, req.body.password,
-          function(err, user) {
-            if (!err) {
-              passport.authenticate("local", {
-                failureRedirect: "/errorRegister"
-              })(req, res, function() {
-                res.redirect("/admin");
-              });
-
-            } else {
-              res.redirect("/errorRegister");
-            }
-          });
-      } else {
-        res.redirect("/errorRegister");
-      }
-    } else {
-      console.log(err);
-      res.redirect("/errorRegister");
-    }
-  });
-});
-
 app.get("/errorRegister", function(req, res) {
   res.render("errorRegister");
 });
-
 app.post("/login", function(req, res) {
   const user = new User({
     username: req.body.username,
@@ -430,7 +344,92 @@ app.post("/login", function(req, res) {
     }
   });
 });
-app.get("/registerAdmin",function(req,res){
+
+app.post("/registerAdmin", function(req, res) {
+  let password = req.body.password;
+  let password2 = req.body.password2;
+  let username = req.body.username;
+  let email = req.body.email;
+  let passcode = req.body.passcode;
+  bcrypt.hash(passcode, saltRounds)
+    .then(function(hash) {
+      if (hash) {
+        User.findOne({
+          username: username
+        }, function(err, found) {
+          if (found) {
+            Blog.find({}, function(err, foundItem) {
+              if (!err) {
+                User.findOne({
+                  email: email
+                }, function(err, found) {
+                  if (found) {
+                    res.render("RegisterAdmin", {
+                      blogPost: foundItem,
+                      words: "username already in use. Suggested username: " + username + random.random(),
+                      email: "Email already taken by another user."
+                    });
+                  } else {
+                    res.render("RegisterAdmin", {
+                      blogPost: foundItem,
+                      words: "username already in use. Suggested username: " + username + random.random(),
+                      email: null
+                    });
+                  }
+                });
+              }
+            });
+          } else if (!found) {
+            Blog.find({}, function(err, foundItem) {
+              if (!err) {
+                User.findOne({
+                  email: email
+                }, function(err, found) {
+                  if (found) {
+                    res.render("RegisterAdmin", {
+                      blogPost: foundItem,
+                      words: null,
+                      email: "Email already taken by another user."
+                    });
+                  }
+                });
+              }
+            });
+            if (password === password2) {
+              User.register({
+                  username: username,
+                  email: email,
+                  last_name: req.body.surname,
+                  first_name: req.body.name,
+                  organisation_name: req.body.organisation,
+                  passcode: hash
+                }, req.body.password,
+                function(err, user) {
+                  if (!err) {
+                    passport.authenticate("local", {
+                      failureRedirect: "/errorRegister"
+                    })(req, res, function() {
+                      res.redirect("/admin");
+                    });
+                  } else {
+                    res.redirect("/errorRegister");
+                  }
+                });
+            } else {
+              res.redirect("/errorRegister");
+            }
+          } else {
+            console.log(err);
+            res.redirect("/errorRegister");
+          }
+        });
+      }
+    })
+    .catch((error) => {
+      console.log("Error somewhere: " + error);
+    });
+});
+app.get("/registerAdmin", function(req, res) {
   Blog.find({}, function(err, foundItem) {
     if (err) {
       console.log(err);
@@ -443,7 +442,8 @@ app.get("/registerAdmin",function(req,res){
     }
   });
 });
-app.get('/admin',function(req,res){
+
+app.get('/admin', function(req, res) {
   Blog.find({}, function(err, foundItem) {
     if (err) {
       console.log(err);
@@ -455,15 +455,14 @@ app.get('/admin',function(req,res){
     }
   });
 });
-
 app.post("/admin", function(req, res) {
   User.findOne({
     username: req.body.username
   }, function(err, found) {
-    if (!found) {
+    if (found) {
       let hash = found.passcode;
-      bcrypt.compare(req.body.passcode, hash, function(err, res) {
-        if (res === true) {
+      bcrypt.compare(req.body.passcode, hash).then(function(result) {
+        if (result === true) {
           const user = new User({
             username: req.body.username,
             password: req.body.password,
@@ -490,6 +489,7 @@ app.post("/admin", function(req, res) {
     }
   });
 });
+
 app.get("/failureLogin", function(req, res) {
   Blog.find({}, function(err, foundItem) {
     res.render("login", {
@@ -617,22 +617,25 @@ app.get("/myBlog/message/:param", function(req, res) {
   });
 });
 
-// Admin part of dome technologies
+// Admin part of hubtek 
 app.get("/dashboard", function(req, res) {
   if (req.isAuthenticated()) {
-    if (req.passcode === process.env.PASSCODE) {
-      User.find({}, function(err, foundItem) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.render("customerEntry", {
-            customer: foundItem
-          });
-        }
-      });
-    } else {
-      res.redirect("/login");
-    }
+    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function(result) {
+      if (result) {
+        User.find({}, function(err, foundItem) {
+          if (err) {
+            console.log(err);
+          } else {
+            res.render("customerEntry", {
+              customer: foundItem
+            });
+          }
+        });
+      } else {
+        res.redirect("/admin");
+      }
+
+    });
   } else {
     res.redirect("/admin");
   }
@@ -640,11 +643,13 @@ app.get("/dashboard", function(req, res) {
 
 app.get("/blog", function(req, res) {
   if (req.isAuthenticated()) {
-    if (req.passcode === process.env.PASSCODE) {
-      res.render("blog");
-    } else {
-      res.redirect("/login");
-    }
+    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function(result) {
+      if (result) {
+        res.render("blog");
+      } else {
+        res.redirect("/login");
+      }
+    });
   } else {
     res.redirect("/admin");
   }
@@ -652,27 +657,29 @@ app.get("/blog", function(req, res) {
 
 app.post("/blog", function(req, res) {
   if (req.isAuthenticated()) {
-    if (req.passcode === process.env.PASSCODE) {
-      const blog = new Blog({
-        authorName: req.body.author,
-        title: _.startCase(req.body.title),
-        content: req.body.content,
-        time: getDate.getDate(),
-        imageurl: req.body.url,
-        typeofBlog: req.body.typeofBlog
-      });
-      blog.save(function(err) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("Successful");
-        }
-      });
-      res.redirect("/blog");
+    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function(result) {
+      if (result) {
+        const blog = new Blog({
+          authorName: req.body.author,
+          title: _.startCase(req.body.title),
+          content: req.body.content,
+          time: getDate.getDate(),
+          imageurl: req.body.url,
+          typeofBlog: req.body.typeofBlog
+        });
+        blog.save(function(err) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("Successful");
+          }
+        });
+        res.redirect("/blog");
 
-    } else {
-      res.redirect("/login");
-    }
+      } else {
+        res.redirect("/login");
+      }
+    });
   } else {
     res.redirect("/admin");
   }
@@ -680,19 +687,21 @@ app.post("/blog", function(req, res) {
 
 app.get("/reports", function(req, res) {
   if (req.isAuthenticated()) {
-    if (req.passcode === process.env.PASSCODE) {
-      Blog.find({}, function(err, foundItem) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.render("reports", {
-            report: foundItem
-          });
-        }
-      });
-    } else {
-      res.redirect("/login");
-    }
+    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function(result) {
+      if (result) {
+        Blog.find({}, function(err, foundItem) {
+          if (err) {
+            console.log(err);
+          } else {
+            res.render("reports", {
+              report: foundItem
+            });
+          }
+        });
+      } else {
+        res.redirect("/login");
+      }
+    });
   } else {
     res.redirect("/admin");
   }
@@ -700,11 +709,13 @@ app.get("/reports", function(req, res) {
 
 app.get("/integration", function(req, res) {
   if (req.isAuthenticated()) {
-    if (req.passcode === process.env.PASSCODE) {
-      res.render("integration");
-    } else {
-      res.redirect("/login");
-    }
+    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function(result) {
+      if (result) {
+        res.render("integration");
+      } else {
+        res.redirect("/login");
+      }
+    });
   } else {
     res.redirect("/admin");
   }
@@ -712,36 +723,38 @@ app.get("/integration", function(req, res) {
 
 app.post("/integration", function(req, res) {
   if (req.isAuthenticated()) {
-    if (req.passcode === process.env.PASSCODE) {
-      if (typeof(req.body.apiNames) === "object") {
-        for (var i = 0; i < req.body.apiNames.length; i++) {
-          const integration = new Integration({
-            apiName: req.body.apiNames[i],
-            apiImageAddress: req.body.apiImageAddresses[i],
-            apiLinkAddress: req.body.apiAddresses[i],
-            apiCompanySupplier: req.body.apiCompanySupplier[i]
-          });
-          integration.save();
-        }
-      } else {
-        const integration = new Integration({
-          apiName: req.body.apiNames,
-          apiImageAddress: req.body.apiImageAddresses,
-          apiLinkAddress: req.body.apiAddresses,
-          apiCompanySupplier: req.body.apiCompanySupplier
-        });
-        integration.save(function(err) {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log("Successful");
+    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function(result) {
+      if (result) {
+        if (typeof(req.body.apiNames) === "object") {
+          for (var i = 0; i < req.body.apiNames.length; i++) {
+            const integration = new Integration({
+              apiName: req.body.apiNames[i],
+              apiImageAddress: req.body.apiImageAddresses[i],
+              apiLinkAddress: req.body.apiAddresses[i],
+              apiCompanySupplier: req.body.apiCompanySupplier[i]
+            });
+            integration.save();
           }
-        });
+        } else {
+          const integration = new Integration({
+            apiName: req.body.apiNames,
+            apiImageAddress: req.body.apiImageAddresses,
+            apiLinkAddress: req.body.apiAddresses,
+            apiCompanySupplier: req.body.apiCompanySupplier
+          });
+          integration.save(function(err) {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log("Successful");
+            }
+          });
+        }
+        res.redirect("/integration");
+      } else {
+        res.redirect("/login");
       }
-      res.redirect("/integration");
-    } else {
-      res.redirect("/login");
-    }
+    });
   } else {
     res.redirect("/admin");
   }
@@ -749,47 +762,55 @@ app.post("/integration", function(req, res) {
 
 /******************* Delete blog and/or delete customer ******************/
 app.post("/del_b", function(req, res) {
-  let delBlogItem = req.body.delete;
-  Blog.deleteOne({
-    _id: delBlogItem
-  }, function(err) {
-    if (!err) {
-      res.redirect("/reports");
+  bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function(result) {
+    if (result) {
+      let delBlogItem = req.body.delete;
+      Blog.deleteOne({
+        _id: delBlogItem
+      }, function(err) {
+        if (!err) {
+          res.redirect("/reports");
+        }
+      });
     }
   });
 });
 
 app.post("/del_c", function(req, res) {
-  let delCustomer1 = req.body.delete1;
-  let delCustomer2 = req.body.delete2;
-  let delCustomer3 = req.body.delete3;
-  if (delCustomer1 !== undefined) {
-    User.deleteOne({
-      _id: delCustomer1
-    }, function(err) {
-      if (!err) {
-        res.redirect("/dashboard");
-      }
-    });
-  } else if (delCustomer2 !== undefined) {
-    Member.findByIdAndRemove(delCustomer2, function(err, founditem) {
-      if (!err) {
-        User.findOne({
-          _id: delCustomer3
-        }, function(err, foundItem) {
+  bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function(result) {
+    if (result) {
+      let delCustomer1 = req.body.delete1;
+      let delCustomer2 = req.body.delete2;
+      let delCustomer3 = req.body.delete3;
+      if (delCustomer1 !== undefined) {
+        User.deleteOne({
+          _id: delCustomer1
+        }, function(err) {
           if (!err) {
-            foundItem.member.forEach(function(item, index) {
-              if (item._id == delCustomer2) {
-                foundItem.member.splice(index, 1);
-                foundItem.save();
-                res.redirect("/dashboard");
+            res.redirect("/dashboard");
+          }
+        });
+      } else if (delCustomer2 !== undefined) {
+        Member.findByIdAndRemove(delCustomer2, function(err, founditem) {
+          if (!err) {
+            User.findOne({
+              _id: delCustomer3
+            }, function(err, foundItem) {
+              if (!err) {
+                foundItem.member.forEach(function(item, index) {
+                  if (item._id == delCustomer2) {
+                    foundItem.member.splice(index, 1);
+                    foundItem.save();
+                    res.redirect("/dashboard");
+                  }
+                });
               }
             });
           }
         });
       }
-    });
-  }
+    }
+  });
 });
 
 /********************************* Payment point authentication *******************************/
