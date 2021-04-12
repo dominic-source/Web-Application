@@ -44,7 +44,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 /**********************end initialize passport and session ******************/
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect(process.env.MONGO_URL2, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
