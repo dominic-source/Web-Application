@@ -928,5 +928,5 @@ if (port == null || port == "") {
 }
 
 app.listen(port, function(req, res) {
-  console.log("Connected to server 3000");
+  console.log("Server is connected!");
 });
