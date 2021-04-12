@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-lg-4 col-md-6 col-sm-12 shape text-muted">
       <h1 class="fotfont">ABOUT US</h1>
-      <p>
-        hubtek is a fast developing company, hoping to bring her customers dream to life. </p>
+      <p class="changefont2">
+        cadatech is a fast developing company, hoping to bring her customers dream to life. </p>
       <div>
         <span><a href="#" class="cont"><i class="fab fa-facebook-f"></i></a></span>
         <span><a href="#" class="cont"><i class="fab fa-linkedin-in"></i></a></span>
@@ -18,7 +18,14 @@
       <h1 class="fotfont">RECENT POST</h1>
       <div class="leftrecent ">
         <% blogPost.forEach(function(item,index){ if(index === blogPost.length-1 ||index === blogPost.length-2||index === blogPost.length-3){ %>
-        <p><span class="angle"> > </span><%= item.title %></p>
+        <p class="changefont2">
+          <a href="/myBlog/message/<%= item._id %>" class="nolink">
+            <span class="angle">
+              <i class="fa fa-arrow-right"></i>
+            </span>
+            <%= item.title %>
+          </a>
+        </p>
         <hr>
         <%  }}); %>
       </div>
@@ -44,7 +51,7 @@
       </div>
     </div>
     <footer class="my-5 pt-5 text-muted text-center text-small shapesmall">
-      <p class="mb-1">&copy; 2020 till date hubtek</p>
+      <p class="mb-1">&copy; 2020 till date cadatech</p>
       <ul class="list-inline">
         <li class="list-inline-item "><a href="#">Privacy</a></li>
         <li class="list-inline-item"><a href="#">Terms</a></li>

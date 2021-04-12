@@ -60,53 +60,53 @@
         <% customer.forEach(function(item,index){ %>
         <% if(item.member !== undefined){ %>
         <%  if(item.member.length === 0) {%>
-        <form action="/del_c" method="post">
-          <tr class="sidecol">
-            <td class="mx-3 spacing">
-              <%= index +1  %>
-            </td>
-            <td class="mx-3 spacing">
-              <%=  item._id %>
-            </td>
-            <td class="mx-3 spacing">
-              <%=  item.googleId %>
-            </td>
-            <td class="mx-3 spacing">
-              <%=  item.username%>
-            </td>
-            <td class="mx-3 spacing">
-              <%=  item.email %>
-            </td>
-            <td class="mx-3 spacing">
-              No Transaction
-            </td>
-            <td class="mx-3 spacing">
-              <%= item.organisation_name %>
-            </td>
-            <td class="mx-3 spacing">
-              No project yet
-            </td>
-            <td class="mx-3 spacing">
-              No project yet
-            </td>
-            <td class="mx-3 spacing">
-              No budget yet
-            </td>
-            <td class="mx-3 spacing">
-              No payment yet
-            </td>
-            <td class="mx-3 spacing">
-              No date for transaction
-            </td>
-            <td class="mx-3 spacing">
-              No Time
-            </td>
-            <td class="mx-3 spacing">
-              Nothing here
-            </td>
-            <td class="mx-3 spacing">
-              Nothing here
-            </td>
+        <tr class="sidecol">
+          <td class="mx-3 spacing">
+            <%= ++index  %>
+          </td>
+          <td class="mx-3 spacing">
+            <%=  item._id %>
+          </td>
+          <td class="mx-3 spacing">
+            <%=  item.googleId %>
+          </td>
+          <td class="mx-3 spacing">
+            <%=  item.username%>
+          </td>
+          <td class="mx-3 spacing">
+            <%=  item.email %>
+          </td>
+          <td class="mx-3 spacing">
+            No Transaction
+          </td>
+          <td class="mx-3 spacing">
+            <%= item.organisation_name %>
+          </td>
+          <td class="mx-3 spacing">
+            No project yet
+          </td>
+          <td class="mx-3 spacing">
+            No project yet
+          </td>
+          <td class="mx-3 spacing">
+            No budget yet
+          </td>
+          <td class="mx-3 spacing">
+            No payment yet
+          </td>
+          <td class="mx-3 spacing">
+            No date for transaction
+          </td>
+          <td class="mx-3 spacing">
+            No Time
+          </td>
+          <td class="mx-3 spacing">
+            Nothing here
+          </td>
+          <td class="mx-3 spacing">
+            Nothing here
+          </td>
+          <form action="/del_c" method="post">
             <td class="mx-3 spacing">
               <button type="button" name="deleted" class="badge form-control adjform">❌</button>
               <div class="areYouSureColor">
@@ -116,79 +116,77 @@
                 <button type="button" name="No" class="btn btn-sm btn-outline-success no">NO</button>
               </div>
             </td>
-          </tr>
-        </form>
-
+          </form>
+        </tr>
         <%    } else  { %>
         <% item.member.forEach(function(member){ %>
+        <tr class="sidecol">
+          <td class="mx-3 spacing">
+            <%= ++index  %>
+          </td>
+          <td class="mx-3 spacing">
+            <%=  item._id %>
+          </td>
+          <td class="mx-3 spacing">
+            <%=  item.googleId %>
+          </td>
+          <td class="mx-3 spacing">
+            <%=  item.username%>
+          </td>
+          <td class="mx-3 spacing">
+            <%=  item.email %>
+          </td>
+          <td class="mx-3 spacing">
+            <%=  member.transactionId %>
+          </td>
+          <td class="mx-3 spacing">
+            <%= item.organisation_name %>
+          </td>
+          <td class="mx-3 spacing">
+            <%= member.projectName %>
+          </td>
+          <td class="mx-3 spacing">
+            <%= member.projectDescription.substr(0,20) %>...
+            <button type="button" name="button" class="btn btn-sm btn-outline-info setProject">view</button>
+            <div class="jumbotron invis try">
+              <i class="fa fa-times-circle fa-3x unView mb-3" aria-hidden="true" style="color:red;"></i>
+              <h5 class="text-mute">Details of project</h5>
+              <%= member.projectDescription %>
+            </div>
+          </td>
+          <td class="mx-3 spacing">
+            <%= member.budget %>
+          </td>
+          <td class="mx-3 spacing">
+            <%= member.payment %>
+          </td>
+          <td class="mx-3 spacing">
+            <%= member.dateOfTransaction %>
+          </td>
+          <td class="mx-3 spacing">
+            <%= member.timeduration %>
+          </td>
+          <td class="mx-3 spacing">
+            <%= member.dateDelivered %>
+          </td>
+          <td class="mx-3 spacing">
+            <%= member.delivered %>
+          </td>
 
-        <form action="/del_c" method="post">
-          <tr class="sidecol">
-            <td class="mx-3 spacing">
-              <%= index+1  %>
-            </td>
-            <td class="mx-3 spacing">
-              <%=  item._id %>
-            </td>
-            <td class="mx-3 spacing">
-              <%=  item.googleId %>
-            </td>
-            <td class="mx-3 spacing">
-              <%=  item.username%>
-            </td>
-            <td class="mx-3 spacing">
-              <%=  item.email %>
-            </td>
-            <td class="mx-3 spacing">
-              <%=  member.transactionId %>
-            </td>
-            <td class="mx-3 spacing">
-              <%= item.organisation_name %>
-            </td>
-            <td class="mx-3 spacing">
-              <%= member.projectName %>
-            </td>
-            <td class="mx-3 spacing">
-              <%= member.projectDescription.substr(0,20) %>...
-              <button type="button" name="button" class="btn btn-sm btn-outline-info setProject">view</button>
-              <div class="jumbotron invis try">
-                <i class="fa fa-times-circle fa-3x unView mb-3" aria-hidden="true" style="color:red;"></i>
-                <h5 class="text-mute">Details of project</h5>
-                <%= member.projectDescription %>
-              </div>
-            </td>
-            <td class="mx-3 spacing">
-              <%= member.budget %>
-            </td>
-            <td class="mx-3 spacing">
-              <%= member.payment %>
-            </td>
-            <td class="mx-3 spacing">
-              <%= member.dateOfTransaction %>
-            </td>
-            <td class="mx-3 spacing">
-              <%= member.timeduration %>
-            </td>
-            <td class="mx-3 spacing">
-              <%= member.dateDelivered %>
-            </td>
-            <td class="mx-3 spacing">
-              <%= member.delivered %>
-            </td>
+          <td class="mx-3 spacing">
 
-            <td class="mx-3 spacing">
-              <button type="button" name="deleted" class="badge form-control adjform">❌</button>
-              <div class="areYouSureColor">
-                <p class="dash">Are you sure?</p>
-                <button type="submit" name="" onClick="this.form.submit()" class="btn btn-sm btn-outline-warning">Yes</button>&nbsp; &nbsp;
+            <button type="button" name="deleted" class="badge form-control adjform">❌</button>
+            <div class="areYouSureColor">
+              <p class="dash">Are you sure?</p>
+              <button type="submit" name="" onClick="this.form.submit()" class="btn btn-sm btn-outline-warning">Yes</button>&nbsp; &nbsp;
+              <form action="/del_c" method="post">
                 <input type="hidden" name="delete2" value="<%= member._id %>" class="yesRemove" />
                 <input type="hidden" name="delete3" value="<%= item._id %>" class="yesRemove" />
-
-                <button type="button" name="No" class="btn btn-sm btn-outline-success no">NO</button>
-              </div>
-            </td>
-          </tr>
-        </form>
+              </form>
+              <button type="button" name="No" class="btn btn-sm btn-outline-success no">NO</button>
+            </div>
+          </td>
+        </tr>
         <%  }); %>
 
         <% }%>

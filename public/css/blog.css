@@ -91,7 +91,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .blog-post-title {
   margin-bottom: .25rem;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
 }
 
 .blog-post-meta {
@@ -148,7 +148,7 @@ h1, h2, h3, h4, h5, h6 {
   border-right: 0.9px;
   color: #515070;
   background-color:#ecf4f3;
-  margin: 1px;
+  margin: 0;
   font-family: 'Montserrat', sans-serif;
   border-radius:5px;
   box-shadow: 0.1px 0.1px 3px lightgreen;
@@ -160,7 +160,6 @@ h1, h2, h3, h4, h5, h6 {
 }
  .domparser h3{
    font-size:20px;
-   /* padding-left: 10px; */
  }
  .domparser small{
    display:inline;

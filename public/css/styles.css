@@ -1,7 +1,7 @@
 /* Navigation */
 .dome {
-  font-weight: bold;
-  font-size: 2rem;
+  /* font-weight: bold; */
+  font-size: 1.5rem;
   font-family: 'Ubuntu', sans-serif;
 }
 
@@ -9,7 +9,7 @@
 visibility: hidden;
 }
 .nav-link:hover {
-  font-weight: bold;
+  font-weight: normal;
 }
 
 .linker {
@@ -18,14 +18,21 @@ visibility: hidden;
 .link{
   color:#393e46;
 }
-
+.nolink{
+  color:inherit;
+}
 .link:active{
   opacity:0.5;
 }
 
 .link:hover{
-  text-decoration-line:none;
+  text-decoration:none;
 }
+
+.nolink:hover{
+  text-decoration:none;
+}
+
 .linker:hover {
   color: #f4f4f4;
 }
@@ -34,20 +41,20 @@ visibility: hidden;
 }
 /* Introduction */
 .navigation-pan {
+  margin-top:0;
   text-align: left;
   margin-left: auto;
   margin-right: auto;
   padding: 0;
-  padding-top: 20px;
+  padding-top: 30px;
   border: 0;
   width: 33rem;
   line-height: 2.5;
 }
 
 .textcolor {
-  color:#537780;
+  color:#00416d;
   font-weight: bold;
-
 }
 
 .dometech:hover {
@@ -55,10 +62,10 @@ visibility: hidden;
 }
 
 .sweet {
+  margin-top:0;
   margin-bottom: 0;
   font-family: 'Montserrat', sans-serif;
-  background-image:url("/images/strategiesDevelopment.jpg")
-
+  background-color:#f8bd7f;
 }
 
 /* How we work */
@@ -84,8 +91,8 @@ visibility: hidden;
 }
 
 .worksection {
-  background:#440047;
-  background:linear-gradient(to top right,#440047 50%,#f09ae9 50%);
+  background:#07689f;
+  background:linear-gradient(to top right,#00416d ,#251f44 70%);
   margin: 0;
 }
 
@@ -128,10 +135,11 @@ visibility: hidden;
 .reasons {
   text-align: center;
   font-family: 'Roboto Condensed', sans-serif;
+  color:white;
 }
 
 .reasons h1 {
-  color: #2a3d66;
+  color: white;
 }
 
 .vertical {
@@ -141,7 +149,7 @@ visibility: hidden;
   border-bottom: 0;
   border-right: 0;
   border-radius: 5px;
-  color: #2a3d66;
+  color: white;
   padding-left: 15px;
   margin: 15px;
   font-family: 'Ubuntu Mono', monospace;
@@ -310,7 +318,7 @@ hr {
 @media (max-width:499px) {
   .moreReasons{
     font-size:25px;
-    font-weight:bold;
+    /* font-weight:bold; */
     font-family: 'Ubuntu', sans-serif;
   }
   .ishape {
@@ -322,10 +330,17 @@ hr {
   }
   .whatsapp{
     position:fixed;
-    bottom:20%;
-    right:35%;
+    bottom:50%;
+    right:20px;
     z-index:5;
     visibility:visible;
+    border:2px green solid;
+    border-radius:25%;
+    padding:4px;
+  }
+  .whatsapp:hover{
+    background-color:#f4f4f4;
+    opacity:0.3;
   }
 
   .online {
@@ -361,7 +376,7 @@ hr {
   }
 
   .sup {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .newsimage {
@@ -429,7 +444,7 @@ hr {
     margin: 20px;
   }
 
-  .designer {
+  .designer{
     text-align: left;
     font-size: 30px;
     margin-left: 30px;
@@ -442,7 +457,7 @@ hr {
   }
 
   #day {
-    font-size: 2rem
+    font-size: 1.5rem
   }
 }
 
@@ -503,4 +518,18 @@ hr {
 }
 .preview li{
   margin-bottom:10px;
+}
+.changefont{
+  font-weight:normal;
+  font-size:0.75rem;
+  color:black;
+}
+.changefont2{
+  color:white;
+  font-weight:normal;
+  font-size:0.75rem;
+}
+.changefont3{
+  font-weight: normal;
+  font-size:0.75rem;
 }

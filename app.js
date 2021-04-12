@@ -35,7 +35,7 @@ app.set('view engine', 'ejs');
 app.use(express.static("public"));
 
 app.use(session({
-  secret: "Our little secret",
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: false
 }));
@@ -44,7 +44,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 /**********************end initialize passport and session ******************/
-// mongoose.connect("mongodb+srv://chinonso:Qk8EAPL1Q1UqtnFj@cluster0.uzojh.mongodb.net/Web_appDB?retryWrites=true&w=majority",{
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -74,8 +73,6 @@ const blogSchema = new mongoose.Schema({
 
 const paymentSchema = new mongoose.Schema({
   email: String,
-  firstName: String,
-  lastName: String,
   id: Number,
   customerCode: String,
   Amount: Number,
@@ -107,13 +104,12 @@ const userSchema = new mongoose.Schema({
   username: String,
   password: String,
   email: String,
-  last_name: String,
-  first_name: String,
   organisation_name: String,
   googleId: String,
   active: Boolean,
   secret: String,
-  passcode: String
+  passcode: String,
+  member:[memberSchema]
 });
 
 //End of schema area
@@ -181,6 +177,7 @@ app.get('/auth/google',
   })
 );
 
+
 app.get('/auth/google/member',
   passport.authenticate('google', {
     failureRedirect: '/login'
@@ -190,6 +187,7 @@ app.get('/auth/google/member',
       id: req.user.id
     });
   });
+
 
 app.get("/register", function(req, res) {
   Blog.find({}, function(err, foundItem) {
@@ -204,6 +202,7 @@ app.get("/register", function(req, res) {
     }
   });
 });
+
 
 app.get("/login", function(req, res) {
   Blog.find({}, function(err, foundItem) {
@@ -243,10 +242,14 @@ app.get("/member", function(req, res) {
     res.redirect("/login");
   }
 });
+
+
 app.get("/logout", function(req, res) {
   req.logout();
   res.redirect("/");
 });
+
+
 app.post("/register", function(req, res) {
   let password = req.body.password;
   let password2 = req.body.password2;
@@ -293,12 +296,11 @@ app.post("/register", function(req, res) {
           });
         }
       });
+      // server side validation
       if (password === password2) {
         User.register({
             username: username,
             email: email,
-            last_name: req.body.surname,
-            first_name: req.body.name,
             organisation_name: req.body.organisation
           }, req.body.password,
           function(err, user) {
@@ -308,7 +310,6 @@ app.post("/register", function(req, res) {
               })(req, res, function() {
                 res.redirect("/login");
               });
-
             } else {
               res.redirect("/errorRegister");
             }
@@ -322,14 +323,19 @@ app.post("/register", function(req, res) {
     }
   });
 });
+
+
 app.get("/errorRegister", function(req, res) {
   res.render("errorRegister");
 });
+
+
 app.post("/login", function(req, res) {
   const user = new User({
     username: req.body.username,
     password: req.body.password
   });
+
   req.login(user, function(err) {
     if (err) {
       console.log("There was an error");
@@ -345,12 +351,14 @@ app.post("/login", function(req, res) {
   });
 });
 
+
 app.post("/registerAdmin", function(req, res) {
   let password = req.body.password;
   let password2 = req.body.password2;
   let username = req.body.username;
   let email = req.body.email;
   let passcode = req.body.passcode;
+
   bcrypt.hash(passcode, saltRounds)
     .then(function(hash) {
       if (hash) {
@@ -369,7 +377,7 @@ app.post("/registerAdmin", function(req, res) {
                       words: "username already in use. Suggested username: " + username + random.random(),
                       email: "Email already taken by another user."
                     });
-                  } else {
+                  } else if (!found) {
                     res.render("RegisterAdmin", {
                       blogPost: foundItem,
                       words: "username already in use. Suggested username: " + username + random.random(),
@@ -394,30 +402,28 @@ app.post("/registerAdmin", function(req, res) {
                   }
                 });
               }
+              if (password === password2) {
+                User.register({
+                    username: username,
+                    email: email,
+                    organisation_name: req.body.organisation,
+                    passcode: hash
+                  }, req.body.password,
+                  function(err, user) {
+                    if (!err) {
+                      passport.authenticate("local", {
+                        failureRedirect: "/errorRegister"
+                      })(req, res, function() {
+                        res.redirect("/admin");
+                      });
+                    } else {
+                      res.redirect("/errorRegister");
+                    }
+                  });
+              } else {
+                res.redirect("/errorRegister");
+              }
             });
-            if (password === password2) {
-              User.register({
-                  username: username,
-                  email: email,
-                  last_name: req.body.surname,
-                  first_name: req.body.name,
-                  organisation_name: req.body.organisation,
-                  passcode: hash
-                }, req.body.password,
-                function(err, user) {
-                  if (!err) {
-                    passport.authenticate("local", {
-                      failureRedirect: "/errorRegister"
-                    })(req, res, function() {
-                      res.redirect("/admin");
-                    });
-                  } else {
-                    res.redirect("/errorRegister");
-                  }
-                });
-            } else {
-              res.redirect("/errorRegister");
-            }
           } else {
             console.log(err);
             res.redirect("/errorRegister");
@@ -425,10 +431,12 @@ app.post("/registerAdmin", function(req, res) {
         });
       }
     })
-    .catch((error) => {
+    .catch(error => {
       console.log("Error somewhere: " + error);
     });
 });
+
+
 app.get("/registerAdmin", function(req, res) {
   Blog.find({}, function(err, foundItem) {
     if (err) {
@@ -443,6 +451,7 @@ app.get("/registerAdmin", function(req, res) {
   });
 });
 
+
 app.get('/admin', function(req, res) {
   Blog.find({}, function(err, foundItem) {
     if (err) {
@@ -455,18 +464,22 @@ app.get('/admin', function(req, res) {
     }
   });
 });
+
+
 app.post("/admin", function(req, res) {
   User.findOne({
     username: req.body.username
   }, function(err, found) {
     if (found) {
       let hash = found.passcode;
+
       bcrypt.compare(req.body.passcode, hash).then(function(result) {
         if (result === true) {
           const user = new User({
             username: req.body.username,
             password: req.body.password,
           });
+
           req.login(user, function(err) {
             if (err) {
               console.log("There was an error");
@@ -494,7 +507,7 @@ app.get("/failureLogin", function(req, res) {
   Blog.find({}, function(err, foundItem) {
     res.render("login", {
       blogPost: foundItem,
-      words: "Invalid username or passwords."
+      words: "Invalid username or password."
     });
   });
 });
@@ -519,20 +532,22 @@ app.post("/transaction/create", function(req, res) {
       delivered: "Not yet delivered",
       dateDelivered: "Not yet delivered"
     });
+
     member.save();
     User.findOne({
       _id: req.user._id
     }, function(err, foundItem) {
+      console.log(foundItem);
       foundItem.member.push(member);
       foundItem.save();
       res.redirect("/member");
     });
   }
 });
-/**********************************End of business logic ***********************************/
+/********************************** End of business logic ***********************************/
 
 
-// Main part of hubtek
+// Main part of cadatech
 app.get("/", function(req, res) {
   Blog.find({}, function(err, foundItem) {
     if (err) {
@@ -544,6 +559,7 @@ app.get("/", function(req, res) {
     }
   });
 });
+
 
 app.get("/products", function(req, res) {
   Blog.find({}, function(err, foundItem) {
@@ -557,6 +573,7 @@ app.get("/products", function(req, res) {
   });
 });
 
+
 app.get("/myBlog", function(req, res) {
   Blog.find({}, function(err, foundItem) {
     if (err) {
@@ -568,6 +585,7 @@ app.get("/myBlog", function(req, res) {
     }
   });
 });
+
 
 app.post("/search", function(req, res) {
   let blogTitle = req.body.blogtitle;
@@ -594,6 +612,7 @@ app.post("/search", function(req, res) {
   }
 });
 
+
 app.get("/myBlog/message/:param", function(req, res) {
   Blog.findById(req.params.param, function(err, foundItem) {
     if (err) {
@@ -617,7 +636,7 @@ app.get("/myBlog/message/:param", function(req, res) {
   });
 });
 
-// Admin part of hubtek 
+// Admin part of cadatech
 app.get("/dashboard", function(req, res) {
   if (req.isAuthenticated()) {
     bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function(result) {

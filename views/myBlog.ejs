@@ -19,13 +19,10 @@
 <!-- Custom styles for this template -->
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
 <!-- Custom styles for this template -->
-
-<div class="container">
-  <header class="blog-header py-3">
-    <div class="row flex-nowrap justify-content-between align-items-center">
-      <a href="/register" class="btn btn-outline-dark mr-sm-3 mr-3 btn-sm">Hire me</a>
-    </div>
-  </header>
+<div class="text-white text-center">
+<h4 class="ml-3 mt-3">Information</h4>
+</div>
+<div class="container pt-2">
   <% blogPost.forEach(function(item,index){ %>
   <% if(index == (blogPost.length)-1){ %>
   <div class="jumbotron p-4 p-md-5 text-white rounded bgdark">
@@ -43,15 +40,15 @@
       <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class=" col p-4 d-flex flex-column position-static combak">
           <strong class="d-inline-block mb-2 text-primary"><%- item.typeofBlog %></strong>
-          <h3 class="mb-0"><%- item.title %></h3>
-          <div class="mb-1 text-muted"><%- item.time %></div>
+          <h3 class="mb-0 "><%- item.title %></h3>
+          <div class="mb-1 text-muted changefont3"><%- item.time %></div>
           <div class="">
-            <p class="card-text mb-auto">
+            <p class="card-text mb-auto changefont">
               <%- item.content.substr(0,50) %>
               ...</p>
           </div>
 
-          <a href="/myBlog/message/<%- item._id %>" class="stretched-link">Continue reading</a>
+          <a href="/myBlog/message/<%- item._id %>" class="stretched-link changefont3">Continue reading</a>
         </div>
 
         <div class="col-auto d-none d-lg-block">
@@ -66,16 +63,16 @@
   <div class="row">
     <div class="col-md-8 blog-main">
       <h3 class="pb-4 mb-4 font-italic border-bottom">
-        From the hubtek
+        From the cadatech
       </h3>
       <% blogPost.forEach(function(item){%>
       <div class="blog-post">
-        <h2 class="blog-post-title" id=<%= item._id %>><%- item.title %></h2>
-        <p class="blog-post-meta"><%- item.time %>&nbsp; by &nbsp;<%- item.authorName %></p>
+        <h2 class="blog-post-title" id = <%= item._id %>><%- item.title %></h2>
+        <p class="blog-post-meta changefont"><%- item.time %>&nbsp; by &nbsp;<%- item.authorName %></p>
         <div class="domparser">
-          <div>
+          <div class="changefont">
             <%- item.content.substr(0,200) %>
-            <small><a href="/myBlog/message/<%= item._id %>" class="link bold"> Read more...</a></small>
+            <small><a href="/myBlog/message/<%= item._id %>" class="link"> Read more...</a></small>
             <small> <%= item.views %> views &nbsp;<i class="fa fa-eye" aria-hidden="true"></i></small>
           </div>
         </div>
@@ -88,7 +85,7 @@
     </div>
     <!-- /.blog-sidebar -->
     <aside class="col-md-4 blog-sidebar">
-      <div class="p-4 mb-3 bg-light rounded">
+      <div class="p-4 mb-3 bg-light rounded ubuntu">
         <h4 class="font-italic">About</h4>
         <p class="mb-0">Our blog provides you with good <em>quality information</em>. We hope to enlighten you the more. </p>
       </div>
