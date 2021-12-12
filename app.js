@@ -847,6 +847,7 @@ app.post("/payment", function(reqs, resp) {
     "amount": reqs.body.amount * 100,
     "currency": reqs.body.currency
   });
+
   const options = {
     hostname: "api.paystack.co",
     port: 443,
@@ -857,6 +858,7 @@ app.post("/payment", function(reqs, resp) {
       'content-Type': 'application/json'
     }
   };
+  
   const req = https.request(options, res => {
     let data = '';
     res.on('data', (chunk) => {
