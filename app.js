@@ -44,7 +44,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 /**********************end initialize passport and session ******************/
-mongoose.connect(process.env.MONGO_URL2, {
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -858,7 +858,7 @@ app.post("/payment", function(reqs, resp) {
       'content-Type': 'application/json'
     }
   };
-  
+
   const req = https.request(options, res => {
     let data = '';
     res.on('data', (chunk) => {
@@ -930,5 +930,5 @@ if (port == null || port == "") {
 }
 
 app.listen(port, function(req, res) {
-  console.log("Server is connected!");
+  console.log("Server is connected at port " + port);
 });
