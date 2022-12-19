@@ -928,7 +928,7 @@ app.get("/verify_transaction/:reference", function(reqs, resp) {
 
 let port = process.env.PORT;
 if (port == null || port == "") {
-  port = 3007;
+  port = 3000;
 }
 
 app.listen(port, function(req, res) {
