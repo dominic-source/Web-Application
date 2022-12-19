@@ -170,6 +170,7 @@ passport.use(new GoogleStrategy({
 /******************google Strategy**************************/
 
 
+
 /**************************Registration and signing in*******************************/
 
 app.get('/auth/google',
