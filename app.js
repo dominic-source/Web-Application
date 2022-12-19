@@ -40,6 +40,7 @@ app.use(session({
   saveUninitialized: false
 }));
 
+
 /**********************initialize passport and session ******************/
 app.use(passport.initialize());
 app.use(passport.session());
@@ -926,7 +927,7 @@ app.get("/verify_transaction/:reference", function(reqs, resp) {
 
 let port = process.env.PORT;
 if (port == null || port == "") {
-  port = 3000;
+  port = 3007;
 }
 
 app.listen(port, function(req, res) {
