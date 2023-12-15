@@ -109,7 +109,7 @@ const userSchema = new mongoose.Schema({
   active: Boolean,
   secret: String,
   passcode: String,
-  member:[memberSchema]
+  member: [memberSchema]
 });
 
 //End of schema area
@@ -137,12 +137,12 @@ passport.use(User.createStrategy());
 
 
 /*****************Serializing the user ***************************/
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
+passport.deserializeUser(function (id, done) {
+  User.findById(id, function (err, user) {
     console.log(err);
     done(err, user);
   });
@@ -150,23 +150,22 @@ passport.deserializeUser(function(id, done) {
 /*****************End of Serializing the user ***************************/
 
 
-/******************google Strategy**************************/
+/******************google Strategy*************************/
 passport.use(new GoogleStrategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/member",
-    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    // console.log(profile)
+  clientID: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  callbackURL: "http://localhost:3000/auth/google/member",
+  userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
+},
+  function (accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
       googleId: profile.id
-    }, function(err, user) {
+    }, function (err, user) {
       return cb(err, user);
     });
   }
 ));
-/******************google Strategy**************************/
+/*****************google Strategy**************************/
 
 
 /**************************Registration and signing in*******************************/
@@ -182,19 +181,19 @@ app.get('/auth/google/member',
   passport.authenticate('google', {
     failureRedirect: '/login'
   }),
-  function(req, res) {
+  function (req, res) {
     res.render("member", {
       id: req.user.id
     });
   });
 
 
-app.get("/register", function(req, res) {
-  Blog.find({}, function(err, foundItem) {
+app.get("/register", function (req, res) {
+  Blog.find({}, function (err, foundItem) {
     if (err) {
       console.log(err);
     } else {
-      res.render("register", {
+      res.render("Register", {
         blogPost: foundItem,
         words: null,
         email: null
@@ -204,8 +203,8 @@ app.get("/register", function(req, res) {
 });
 
 
-app.get("/login", function(req, res) {
-  Blog.find({}, function(err, foundItem) {
+app.get("/login", function (req, res) {
+  Blog.find({}, function (err, foundItem) {
     if (err) {
       console.log(err);
     } else {
@@ -218,9 +217,9 @@ app.get("/login", function(req, res) {
 });
 
 
-app.get("/member", function(req, res) {
+app.get("/member", function (req, res) {
   if (req.isAuthenticated()) {
-    Blog.find({}, function(err, foundItem) {
+    Blog.find({}, function (err, foundItem) {
       if (err) {
         console.log(err);
       } else {
@@ -244,26 +243,26 @@ app.get("/member", function(req, res) {
 });
 
 
-app.get("/logout", function(req, res) {
+app.get("/logout", function (req, res) {
   req.logout();
   res.redirect("/");
 });
 
 
-app.post("/register", function(req, res) {
+app.post("/register", function (req, res) {
   let password = req.body.password;
   let password2 = req.body.password2;
   let username = req.body.username;
   let email = req.body.email;
   User.findOne({
     username: username
-  }, function(err, found) {
+  }, function (err, found) {
     if (found) {
-      Blog.find({}, function(err, foundItem) {
+      Blog.find({}, function (err, foundItem) {
         if (!err) {
           User.findOne({
             email: email
-          }, function(err, found) {
+          }, function (err, found) {
             if (found) {
               res.render("register", {
                 blogPost: foundItem,
@@ -281,11 +280,11 @@ app.post("/register", function(req, res) {
         }
       });
     } else if (!found) {
-      Blog.find({}, function(err, foundItem) {
+      Blog.find({}, function (err, foundItem) {
         if (!err) {
           User.findOne({
             email: email
-          }, function(err, found) {
+          }, function (err, found) {
             if (found) {
               res.render("register", {
                 blogPost: foundItem,
@@ -299,15 +298,15 @@ app.post("/register", function(req, res) {
       // server side validation
       if (password === password2) {
         User.register({
-            username: username,
-            email: email,
-            organisation_name: req.body.organisation
-          }, req.body.password,
-          function(err, user) {
+          username: username,
+          email: email,
+          organisation_name: req.body.organisation
+        }, req.body.password,
+          function (err, user) {
             if (!err) {
               passport.authenticate("local", {
                 failureRedirect: "/errorRegister"
-              })(req, res, function() {
+              })(req, res, function () {
                 res.redirect("/login");
               });
             } else {
@@ -325,24 +324,24 @@ app.post("/register", function(req, res) {
 });
 
 
-app.get("/errorRegister", function(req, res) {
+app.get("/errorRegister", function (req, res) {
   res.render("errorRegister");
 });
 
 
-app.post("/login", function(req, res) {
+app.post("/login", function (req, res) {
   const user = new User({
     username: req.body.username,
     password: req.body.password
   });
 
-  req.login(user, function(err) {
+  req.login(user, function (err) {
     if (err) {
       console.log("There was an error");
     } else {
       passport.authenticate("local", {
         failureRedirect: "/failureLogin"
-      })(req, res, function() {
+      })(req, res, function () {
         if (!err) {
           res.redirect("/member");
         }
@@ -352,7 +351,7 @@ app.post("/login", function(req, res) {
 });
 
 
-app.post("/registerAdmin", function(req, res) {
+app.post("/registerAdmin", function (req, res) {
   let password = req.body.password;
   let password2 = req.body.password2;
   let username = req.body.username;
@@ -360,17 +359,17 @@ app.post("/registerAdmin", function(req, res) {
   let passcode = req.body.passcode;
 
   bcrypt.hash(passcode, saltRounds)
-    .then(function(hash) {
+    .then(function (hash) {
       if (hash) {
         User.findOne({
           username: username
-        }, function(err, found) {
+        }, function (err, found) {
           if (found) {
-            Blog.find({}, function(err, foundItem) {
+            Blog.find({}, function (err, foundItem) {
               if (!err) {
                 User.findOne({
                   email: email
-                }, function(err, found) {
+                }, function (err, found) {
                   if (found) {
                     res.render("RegisterAdmin", {
                       blogPost: foundItem,
@@ -388,11 +387,11 @@ app.post("/registerAdmin", function(req, res) {
               }
             });
           } else if (!found) {
-            Blog.find({}, function(err, foundItem) {
+            Blog.find({}, function (err, foundItem) {
               if (!err) {
                 User.findOne({
                   email: email
-                }, function(err, found) {
+                }, function (err, found) {
                   if (found) {
                     res.render("RegisterAdmin", {
                       blogPost: foundItem,
@@ -404,18 +403,33 @@ app.post("/registerAdmin", function(req, res) {
               }
               if (password === password2) {
                 User.register({
-                    username: username,
-                    email: email,
-                    organisation_name: req.body.organisation,
-                    passcode: hash
-                  }, req.body.password,
-                  function(err, user) {
+                  username: username,
+                  email: email,
+                  organisation_name: req.body.organisation,
+                  passcode: hash
+                }, req.body.password,
+                  function (err, user) {
                     if (!err) {
-                      passport.authenticate("local", {
-                        failureRedirect: "/errorRegister"
-                      })(req, res, function() {
-                        res.redirect("/admin");
-                      });
+
+                      passport.authenticate('local', function (err, user, info) {
+                        if (err) {
+                          // Handle error in authentication
+                          return res.redirect('/errorRegister');
+                        }
+                        if (!user) {
+                          // Handle authentication failure
+                          return res.redirect('/errorRegister');
+                        }
+                        // If authentication is successful, use passport's login function
+                        req.logIn(user, function (err) {
+                          if (err) {
+                            return res.redirect('/errorRegister');
+                          }
+                          // Redirect to the desired page upon successful authentication
+                          return res.redirect('/admin');
+                        });
+                      })(req, res);
+
                     } else {
                       res.redirect("/errorRegister");
                     }
@@ -437,8 +451,8 @@ app.post("/registerAdmin", function(req, res) {
 });
 
 
-app.get("/registerAdmin", function(req, res) {
-  Blog.find({}, function(err, foundItem) {
+app.get("/registerAdmin", function (req, res) {
+  Blog.find({}, function (err, foundItem) {
     if (err) {
       console.log(err);
     } else {
@@ -452,8 +466,8 @@ app.get("/registerAdmin", function(req, res) {
 });
 
 
-app.get('/admin', function(req, res) {
-  Blog.find({}, function(err, foundItem) {
+app.get('/admin', function (req, res) {
+  Blog.find({}, function (err, foundItem) {
     if (err) {
       console.log(err);
     } else {
@@ -466,27 +480,30 @@ app.get('/admin', function(req, res) {
 });
 
 
-app.post("/admin", function(req, res) {
+app.post("/admin", function (req, res) {
   User.findOne({
     username: req.body.username
-  }, function(err, found) {
+  }, function (err, found) {
     if (found) {
+      if (!found.passcode) {
+        res.redirect("/errorRegister");
+      }
       let hash = found.passcode;
 
-      bcrypt.compare(req.body.passcode, hash).then(function(result) {
+      bcrypt.compare(req.body.passcode, hash).then(function (result) {
         if (result === true) {
           const user = new User({
             username: req.body.username,
             password: req.body.password,
           });
 
-          req.login(user, function(err) {
+          req.login(user, function (err) {
             if (err) {
               console.log("There was an error");
             } else {
               passport.authenticate("local", {
                 failureRedirect: "/failureLogin"
-              })(req, res, function() {
+              })(req, res, function () {
                 if (!err) {
                   res.redirect("/dashboard");
                 }
@@ -503,8 +520,8 @@ app.post("/admin", function(req, res) {
   });
 });
 
-app.get("/failureLogin", function(req, res) {
-  Blog.find({}, function(err, foundItem) {
+app.get("/failureLogin", function (req, res) {
+  Blog.find({}, function (err, foundItem) {
     res.render("login", {
       blogPost: foundItem,
       words: "Invalid username or password."
@@ -514,7 +531,7 @@ app.get("/failureLogin", function(req, res) {
 /******************************* End of registeration and signing in ******************************/
 
 /******************************** Beginning of business logic *****************************/
-app.post("/transaction/create", function(req, res) {
+app.post("/transaction/create", function (req, res) {
   if (req.isAuthenticated()) {
     const projectName = req.body.projectName;
     const currency = req.body.currency;
@@ -536,8 +553,7 @@ app.post("/transaction/create", function(req, res) {
     member.save();
     User.findOne({
       _id: req.user._id
-    }, function(err, foundItem) {
-      console.log(foundItem);
+    }, function (err, foundItem) {
       foundItem.member.push(member);
       foundItem.save();
       res.redirect("/member");
@@ -548,8 +564,8 @@ app.post("/transaction/create", function(req, res) {
 
 
 // Main part of cadatech
-app.get("/", function(req, res) {
-  Blog.find({}, function(err, foundItem) {
+app.get("/", function (req, res) {
+  Blog.find({}, function (err, foundItem) {
     if (err) {
       console.log(err);
     } else {
@@ -561,8 +577,8 @@ app.get("/", function(req, res) {
 });
 
 
-app.get("/products", function(req, res) {
-  Blog.find({}, function(err, foundItem) {
+app.get("/products", function (req, res) {
+  Blog.find({}, function (err, foundItem) {
     if (err) {
       console.log(err);
     } else {
@@ -574,8 +590,8 @@ app.get("/products", function(req, res) {
 });
 
 
-app.get("/myBlog", function(req, res) {
-  Blog.find({}, function(err, foundItem) {
+app.get("/myBlog", function (req, res) {
+  Blog.find({}, function (err, foundItem) {
     if (err) {
       console.log(err);
     } else {
@@ -587,14 +603,14 @@ app.get("/myBlog", function(req, res) {
 });
 
 
-app.post("/search", function(req, res) {
+app.post("/search", function (req, res) {
   let blogTitle = req.body.blogtitle;
   if (blogTitle == "") {
     res.redirect("/myBlog");
   } else {
     Blog.find({
       title: _.startCase(blogTitle)
-    }, function(err, foundItem) {
+    }, function (err, foundItem) {
       if (err) {
         console.log(err);
       } else if (foundItem.length === 0) {
@@ -613,8 +629,8 @@ app.post("/search", function(req, res) {
 });
 
 
-app.get("/myBlog/message/:param", function(req, res) {
-  Blog.findById(req.params.param, function(err, foundItem) {
+app.get("/myBlog/message/:param", function (req, res) {
+  Blog.findById(req.params.param, function (err, foundItem) {
     if (err) {
       console.log(err);
     } else {
@@ -624,10 +640,10 @@ app.get("/myBlog/message/:param", function(req, res) {
         $set: {
           views: foundItem.views + 1
         }
-      }, function(err) {
+      }, function (err) {
         if (err) {
           console.log(err);
-        } else {}
+        } else { }
       });
       res.render("message", {
         blogPost: foundItem
@@ -637,11 +653,11 @@ app.get("/myBlog/message/:param", function(req, res) {
 });
 
 // Admin part of cadatech
-app.get("/dashboard", function(req, res) {
+app.get("/dashboard", function (req, res) {
   if (req.isAuthenticated()) {
-    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function(result) {
+    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function (result) {
       if (result) {
-        User.find({}, function(err, foundItem) {
+        User.find({}, function (err, foundItem) {
           if (err) {
             console.log(err);
           } else {
@@ -660,9 +676,9 @@ app.get("/dashboard", function(req, res) {
   }
 });
 
-app.get("/blog", function(req, res) {
+app.get("/blog", function (req, res) {
   if (req.isAuthenticated()) {
-    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function(result) {
+    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function (result) {
       if (result) {
         res.render("blog");
       } else {
@@ -674,9 +690,9 @@ app.get("/blog", function(req, res) {
   }
 });
 
-app.post("/blog", function(req, res) {
+app.post("/blog", function (req, res) {
   if (req.isAuthenticated()) {
-    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function(result) {
+    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function (result) {
       if (result) {
         const blog = new Blog({
           authorName: req.body.author,
@@ -686,7 +702,7 @@ app.post("/blog", function(req, res) {
           imageurl: req.body.url,
           typeofBlog: req.body.typeofBlog
         });
-        blog.save(function(err) {
+        blog.save(function (err) {
           if (err) {
             console.log(err);
           } else {
@@ -704,11 +720,11 @@ app.post("/blog", function(req, res) {
   }
 });
 
-app.get("/reports", function(req, res) {
+app.get("/reports", function (req, res) {
   if (req.isAuthenticated()) {
-    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function(result) {
+    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function (result) {
       if (result) {
-        Blog.find({}, function(err, foundItem) {
+        Blog.find({}, function (err, foundItem) {
           if (err) {
             console.log(err);
           } else {
@@ -726,9 +742,9 @@ app.get("/reports", function(req, res) {
   }
 });
 
-app.get("/integration", function(req, res) {
+app.get("/integration", function (req, res) {
   if (req.isAuthenticated()) {
-    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function(result) {
+    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function (result) {
       if (result) {
         res.render("integration");
       } else {
@@ -740,11 +756,11 @@ app.get("/integration", function(req, res) {
   }
 });
 
-app.post("/integration", function(req, res) {
+app.post("/integration", function (req, res) {
   if (req.isAuthenticated()) {
-    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function(result) {
+    bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function (result) {
       if (result) {
-        if (typeof(req.body.apiNames) === "object") {
+        if (typeof (req.body.apiNames) === "object") {
           for (var i = 0; i < req.body.apiNames.length; i++) {
             const integration = new Integration({
               apiName: req.body.apiNames[i],
@@ -761,7 +777,7 @@ app.post("/integration", function(req, res) {
             apiLinkAddress: req.body.apiAddresses,
             apiCompanySupplier: req.body.apiCompanySupplier
           });
-          integration.save(function(err) {
+          integration.save(function (err) {
             if (err) {
               console.log(err);
             } else {
@@ -780,13 +796,13 @@ app.post("/integration", function(req, res) {
 });
 
 /******************* Delete blog and/or delete customer ******************/
-app.post("/del_b", function(req, res) {
-  bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function(result) {
+app.post("/del_b", function (req, res) {
+  bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function (result) {
     if (result) {
       let delBlogItem = req.body.delete;
       Blog.deleteOne({
         _id: delBlogItem
-      }, function(err) {
+      }, function (err) {
         if (!err) {
           res.redirect("/reports");
         }
@@ -795,8 +811,8 @@ app.post("/del_b", function(req, res) {
   });
 });
 
-app.post("/del_c", function(req, res) {
-  bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function(result) {
+app.post("/del_c", function (req, res) {
+  bcrypt.compare(process.env.PASSCODE, req.user.passcode).then(function (result) {
     if (result) {
       let delCustomer1 = req.body.delete1;
       let delCustomer2 = req.body.delete2;
@@ -804,19 +820,19 @@ app.post("/del_c", function(req, res) {
       if (delCustomer1 !== undefined) {
         User.deleteOne({
           _id: delCustomer1
-        }, function(err) {
+        }, function (err) {
           if (!err) {
             res.redirect("/dashboard");
           }
         });
       } else if (delCustomer2 !== undefined) {
-        Member.findByIdAndRemove(delCustomer2, function(err, founditem) {
+        Member.findByIdAndRemove(delCustomer2, function (err, founditem) {
           if (!err) {
             User.findOne({
               _id: delCustomer3
-            }, function(err, foundItem) {
+            }, function (err, foundItem) {
               if (!err) {
-                foundItem.member.forEach(function(item, index) {
+                foundItem.member.forEach(function (item, index) {
                   if (item._id == delCustomer2) {
                     foundItem.member.splice(index, 1);
                     foundItem.save();
@@ -833,15 +849,15 @@ app.post("/del_c", function(req, res) {
 });
 
 /********************************* Payment point authentication *******************************/
-app.get("/payment1", function(req, res) {
+app.get("/payment1", function (req, res) {
   res.render("payment1");
 });
 
-app.get("/payment3", function(req, res) {
+app.get("/payment3", function (req, res) {
   res.render("payment3");
 });
 
-app.post("/payment", function(reqs, resp) {
+app.post("/payment", function (reqs, resp) {
   const params = JSON.stringify({
     "email": reqs.body.emailAddress,
     "amount": reqs.body.amount * 100,
@@ -858,7 +874,7 @@ app.post("/payment", function(reqs, resp) {
       'content-Type': 'application/json'
     }
   };
-  
+
   const req = https.request(options, res => {
     let data = '';
     res.on('data', (chunk) => {
@@ -877,7 +893,7 @@ app.post("/payment", function(reqs, resp) {
   req.end();
 });
 
-app.get("/verify_transaction/:reference", function(reqs, resp) {
+app.get("/verify_transaction/:reference", function (reqs, resp) {
   const options = {
     hostname: "api.paystack.co",
     port: 443,
@@ -908,7 +924,7 @@ app.get("/verify_transaction/:reference", function(reqs, resp) {
         status: customerInformation.data.status,
         reference: customerInformation.data.reference,
       });
-      payment.save(function(err) {
+      payment.save(function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -929,6 +945,6 @@ if (port == null || port == "") {
   port = 3000;
 }
 
-app.listen(port, function(req, res) {
+app.listen(port, function (req, res) {
   console.log("Server is connected!");
 });
